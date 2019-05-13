@@ -1,0 +1,16 @@
+
+{% if move.move_status.name == "invoice" or move.move_status.name == "pre-move" or move.move_status.name == "move" or move.move_status.name == "post-move" or move.move_status.name == "complete" %}
+  <div class="page-header">
+    <a role="button" data-toggle="collapse" href="#booking-order-details" aria-expanded="false" aria-controls="booking-order-details">
+      <span class="glyphicon glyphicon-list-alt"></span> Booking order details<span class="caret"></span>
+    </a>
+  </div>
+  <div class="collapse" id="booking-order-details">
+  <a class="btn btn-default btn-md" href="{% url 'bookings:booking_order' move.id %}" role="button" data-toggle="modal" ><span class="glyphicon glyphicon-list-alt"></span> View booking order</a>
+  <a class="btn btn-default btn-md" href="{% url 'bookings:send_email' move.id %}" role="button" data-toggle="modal" ><span class="glyphicon glyphicon-envelope"></span> Email booking order</a>
+
+  <br><br>
+  </div>
+{% endif %}
+<!-- raise booking order modal -->
+{% include 'bookings/booking-order-modal.html' %}

@@ -1,0 +1,53 @@
+Confirmation of Pre-Move Survey Appointment <br/>
+
+Date: {{survey.survey_time}} <br/>
+
+Dear {{full_name}}, <br/>
+
+We are pleased to have the opportunity of carrying out your premove survey. <br/>
+
+Your appointment <br/> <br/>
+
+We are happy to confirm that your pre-move survey appointment has been <br/>
+
+scheduled for {{survey_time}} with {{surveyor.first_name}} {{surveyor.last_name}}, Mobile No: {{mobile}}
+
+following address: <br/>
+
+{{address}} <br/>
+
+What to expect <br/>
+
+{{surveyor.first_name}} {{surveyor.last_name}} is a professional Move Representative specialized well versed with the various moving solutions that we offer. The purpose of the pre-move survey is to
+
+understand your specific moving requirements, to provide you with relevant advice
+
+and to complete a detailed survey of your personal items to be moved.
+
+Important: During the survey, please point out any fragile, high value, or unusual
+
+items that may need extra special care and attention. For example, items that will
+
+require crating or disassembly at the time of packing. Please also mention any
+
+additional items that may be added prior to your move but are currently not
+
+available. <br/><br/>
+
+After the survey, our Move Representative will send you a  quotation as soon
+
+as possible with full details on the cost, number of days your move will take
+
+and all the requirements. <br/><br/>
+
+We are passionate about satisfying our customers always while offering moving
+
+solutions and we look forward to Moving you without tears. <br/>
+
+Meanwhile, should you have further queries please do not hesitate to contact me. <br/> <br/>
+
+Kind regards, <br/>
+Cube Mover Limited <br/>
+
+
+{% include 'core/common/email_disclamer.txt' %}

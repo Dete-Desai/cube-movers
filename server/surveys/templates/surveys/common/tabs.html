@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="{{check_list}}"><a href="{% url 'surveys:checklist' pk=move_obj.checklist.id %}" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-list"></span> Survey list</a></li>
+
+  <li role="presentation" class="{{destination}}"><a href="{% url 'surveys:destination' pk=move_obj.id %}" ><span class="glyphicon glyphicon-map-marker"></span> Destination</a></li>
+
+  <li role="presentation" class="{{costing}}"><a href="{% url 'survey_quote' move_obj.checklist.quotation.id %}" aria-controls="profile" role="tab"><span class="glyphicon glyphicon-tag"></span> Costing Sheet</a></li>
+</ul>
+<!-- param = mobe -->

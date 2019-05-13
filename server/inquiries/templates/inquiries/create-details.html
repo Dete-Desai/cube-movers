@@ -1,0 +1,287 @@
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% block title %}Completed moves - Cube Movers{% endblock %}
+{% block label_block %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'inquiry:view' move.id %}">
+  <span class="glyphicon glyphicon-list-alt"></span>
+  Move record</a></li>
+  <li class="active">
+  <span class="glyphicon glyphicon-home"></span>
+  Property details</li>
+</ol>
+{% endblock %}
+{% block content %}
+
+<div class="container"><br>
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <div class="stepwizard">
+        <div class="stepwizard-row setup-panel">
+          <div class="stepwizard-step">
+            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+            <p>Location</p>
+          </div>
+          <div class="stepwizard-step">
+            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+            <p>Property/House</p>
+          </div>
+          <div class="stepwizard-step">
+            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+            <p>Survey details</p>
+          </div>
+        </div>
+      </div>
+      <form role="form" method="post" action="{% url 'inquiry:add_property' pk=move.id %}">
+        {% csrf_token %}
+        <div class="row setup-content" id="step-1">
+
+          <div class="col-xs-12">
+            <div class="col-md-12">
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><span class="glyphicon glyphicon-map-marker"></span> Location details</h3>
+                </div>
+                <div class="panel-body">
+                  <div class="form-group">
+                    {% if form.primary_area_name.errors %}
+                    <div class="has-error">
+                      {% endif %}
+                      <label class="control-label">Primary name of area</label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-map-marker"></span></span>
+
+                        <input name="primary_area_name" maxlength="100" type="text" required="required" class="form-control" placeholder="E.g. Lavington" value="{% if move.primary_area_name %} {{ move.primary_area_name }} {% endif %}" />
+
+                      </div>
+                      {% if form.primary_area_name.errors %}
+                    </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="form-group">
+                    {% if form.secondary_area_name.errors %}
+                    <div class="has-error">
+                      {% endif %}
+                      <label class="control-label">Secondary name of area</label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-map-marker"></span></span>
+
+                        <input name="secondary_area_name" maxlength="100" type="text" required="required" class="form-control" placeholder="E.g. Valley arcade" value="{% if move.secondary_area_name %} {{ move.secondary_area_name }} {%endif%}" />
+
+                      </div>
+                      {% if form.secondary_area_name.errors %}
+                    </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="form-group">
+                    {% if form.street_name.errors %}
+                    <div class="has-error">
+                      {% endif %}
+                      <label class="control-label">Street name</label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-road"></span></span>
+
+                        <input name="street_name" value="{% if move.street_name %} {{ move.street_name }} {%endif%}" maxlength="100" type="text" required="required" class="form-control" placeholder="E.g. Mbooni"  />
+                      </div>
+                      {% if form.street_name.errors %}
+                    </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="form-group">
+                    {% if form.secondary_street_name.errors %}
+                    <div class="has-error">
+                      {% endif %}
+                      <label class="control-label">Secondary street name</label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-road"></span></span>
+
+                        <input name="secondary_street_name" value="{% if move.secondary_street_name %}{{ move.secondary_street_name }} {%endif%}" maxlength="100" type="text" required="required" class="form-control" placeholder="E.g. Off Kikambala road"  />
+                      </div>
+                      {% if form.secondary_street_name.errors %}
+                    </div>
+                    {% endif %}
+                  </div>
+
+                  <button class="btn btn-primary nextBtn btn-md btn-block pull-right" type="button" >Next</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row setup-content" id="step-2">
+          <div class="col-xs-12">
+            <div class="col-md-12">
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><span class="glyphicon glyphicon-home"></span> Property details</h3>
+                </div>
+                <div class="panel-body">
+                  <div class="form-group">
+                    {% if form.gate_color.errors %}
+                    <div class="has-error">
+                      {% endif %}
+                      <label class="control-label">Colour of gate</label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-adjust"></span></span>
+
+                        <input name="gate_color" value="{% if move.gate_color %} {{ move.gate_color }} {%endif%}" maxlength="100" type="text" required="required" class="form-control" placeholder="E.g. Black" required />
+
+                      </div>
+                      {% if form.gate_color.errors %}
+                    </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="form-group">
+                    {% if form.compound_name.errors %}
+                    <div class="has-error">
+                      {% endif %}
+                      <label class="control-label">Name of compound</label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-picture"></span></span>
+
+                        <input name="compound_name" value="{% if move.compound_name %}{{ move.compound_name }} {%endif%}" maxlength="100" type="text" required="required" class="form-control" placeholder="E.g. Taj Apartment" required />
+
+                      </div>
+                      {% if form.compound_name.errors %}
+                    </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="form-group">
+                    {% if form.house_no.errors %}
+                    <div class="has-error">
+                      {% endif %}
+                      <label class="control-label">House number</label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-home"></span></span>
+
+                        <input name="house_no" value="{% if move.house_no %}{{ move.house_no }} {%endif%}" maxlength="100" type="text" required="required" class="form-control" placeholder="E.g. C12" required />
+                      </div>
+                      {% if form.house_no.errors %}
+                    </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="form-group">
+                    {% if form.floor.errors %}
+                    <div class="has-error">
+                      {% endif %}
+                      <label class="control-label">Floor</label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-sort-by-order-alt"></span></span>
+
+                        <input name="floor" value="{% if move.floor %}{{ move.floor }} {%endif%}" maxlength="100" type="text" required="required" class="form-control" placeholder="E.g. 4th floor" required />
+
+                      </div>
+                      {% if form.floor.errors %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    {% if form.land_marks.errors %}
+                    <div class="has-error">
+                      {% endif %}
+                      <label class="land_marks"><span class="glyphicon glyphicon-tree-deciduous"></span> Land marks</label>
+
+                      <textarea name="land_marks" class="form-control" rows="3" placeholder="e.g After Krishna Millennium flats and before green Kiosk, many taxis parked outside the main gate" required>{% if move.land_marks %}{{ move.land_marks }} {%endif%}</textarea>
+                      {% if form.land_marks.errors %}
+
+                    </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="form-group">
+
+                    {% if form.side_of_road.errors %}
+
+                    <div class="has-error">
+                      {% endif %}
+                      <label class="control-label">Side of the road</label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-road"></span></span>
+
+                        <input name="side_of_road" value="{% if move.side_of_road %} {{ move.side_of_road }} {%endif%}"  maxlength="100" type="text" required="required" class="form-control" placeholder="E.g. on the right coming from town" required />
+                      </div>
+                      {% if form.side_of_road.errors %}
+                    </div>
+                    {% endif %}
+                  </div>
+
+                  <button class="btn btn-primary nextBtn btn-md btn-block pull-right" type="button" >Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <div class="row setup-content" id="step-3">
+            <div class="col-xs-12">
+              <div class="col-md-12">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-eye-open"></span> Survey details</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="form-group">
+                      {% if form.survey_time.errors %}
+                      <div class="has-error">
+                        {% endif %}
+                        <label class="control-label">Proposed Survey Date and Time</label>
+                        {% if move.move_time%}
+                        <p><span class="label label-info">Active Proposed Date/Time : {{ move.survey_time }}</span></p>
+                        {% endif %}
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+                          <input name="survey_time" value="{% if move.survey_time %} {{ move.survey_time }} {%endif%}" type='text' class="form-control" id='survey-time' />
+                        </div>
+                        {% if form.survey_time.errors %}
+                      </div>
+                      {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                      {% if form.move_time.errors %}
+                      <div class="has-error">
+                        {% endif %}
+                        <label class="control-label">Proposed Move Date and Time</label>
+                        {% if move.move_time%}
+                        <p><em>Active Date/Time:</em> {{ move.move_time }}</p>
+                        {% endif %}
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+                          <input name="move_time" value="{% if move.move_time %} {{ move.move_time }} {%endif%}" type='text' class="form-control" id='move-time' />
+                        </div>
+                        {% if form.move_time.errors %}
+                      </div>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                  <button class="btn btn-success btn-md btn-block" type="submit">Finish!</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div> <!--ends container -->
+
+  {% endblock %}
+  {% block context_scripts %}
+  <script src="{% static 'core/components/moment/moment.js' %}" ></script>
+  <script src="{% static 'core/components/datepicker/js/bootstrap-datetimepicker.js' %}" ></script>
+  <script src="{% static 'core/scripts/multi-step.js' %}" ></script>
+  <script src="{% static 'core/scripts/inquiry_detail.js' %}" ></script>
+  {% endblock %}

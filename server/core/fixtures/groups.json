@@ -1,0 +1,225 @@
+[
+{
+    "fields": {
+        "name": "move rep",
+        "permissions": [
+            26,
+            35,
+            38,
+            32
+        ]
+    },
+    "model": "auth.group",
+    "pk": 1
+},
+{
+    "fields": {
+        "name": "mover",
+        "permissions": [
+            1,
+            2,
+            3,
+            7,
+            8,
+            9,
+            4,
+            5,
+            6,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            25,
+            26,
+            27,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            28,
+            29,
+            30,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            52,
+            53,
+            54,
+            64,
+            65,
+            66,
+            34,
+            35,
+            36,
+            67,
+            68,
+            69,
+            22,
+            23,
+            24,
+            37,
+            38,
+            39,
+            49,
+            50,
+            51,
+            31,
+            32,
+            33,
+            19,
+            20,
+            21,
+            16,
+            17,
+            18
+        ]
+    },
+    "model": "auth.group",
+    "pk": 2
+},
+{
+    "fields": {
+        "name": "trainee",
+        "permissions": [
+            1,
+            2,
+            3,
+            7,
+            8,
+            9,
+            4,
+            5,
+            6,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            25,
+            26,
+            27,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            28,
+            29,
+            30,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            52,
+            53,
+            54,
+            64,
+            65,
+            66,
+            34,
+            35,
+            36,
+            67,
+            68,
+            69,
+            22,
+            23,
+            24,
+            37,
+            38,
+            39,
+            49,
+            50,
+            51,
+            31,
+            32,
+            33,
+            19,
+            20,
+            21,
+            16,
+            17,
+            18
+        ]
+    },
+    "model": "auth.group",
+    "pk": 3
+},
+{
+    "fields": {
+        "name": "driver",
+        "permissions": []
+    },
+    "model": "auth.group",
+    "pk": 4
+},
+{
+    "fields": {
+        "name": "move supervisor",
+        "permissions": []
+    },
+    "model": "auth.group",
+    "pk": 5
+},
+{
+    "fields": {
+        "name": "technician",
+        "permissions": []
+    },
+    "model": "auth.group",
+    "pk": 6
+},
+{
+    "fields": {
+        "name": "client service rep",
+        "permissions": []
+    },
+    "model": "auth.group",
+    "pk": 7
+},
+{
+    "fields": {
+        "name": "manager",
+        "permissions": []
+    },
+    "model": "auth.group",
+    "pk": 8
+},
+{
+    "fields": {
+        "name": "move reps",
+        "permissions": [
+            124
+        ]
+    },
+    "model": "auth.group",
+    "pk": 9
+},
+{
+    "fields": {
+        "name": "move_reps",
+        "permissions": [
+            124
+        ]
+    },
+    "model": "auth.group",
+    "pk": 11
+}
+]

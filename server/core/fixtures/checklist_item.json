@@ -1,0 +1,242 @@
+[
+  {
+    "model": "core.item",
+    "pk": 1,
+    "fields": {
+      "name": "Three seater sofa",
+      "vol": 1.8
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 2,
+    "fields": {
+      "name": "Two seater sofa",
+      "vol": 1.2
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 3,
+    "fields": {
+      "name": "Dining table + 8 chairs",
+      "vol": 4
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 4,
+    "fields": {
+      "name": "Dining table + 6 chairs",
+      "vol": 3.1
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 5,
+    "fields": {
+      "name": "5 x 6 bed",
+      "vol": 2.3
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 6,
+    "fields": {
+      "name": "Bedside table",
+      "vol": 0.1
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 7,
+    "fields": {
+      "name": "Desk Large",
+      "vol": 0.9
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 8,
+    "fields": {
+      "name": "Desk Medium",
+      "vol": 0.7
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 9,
+    "fields": {
+      "name": "Refrigirator Double door",
+      "vol": 1.5
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 10,
+    "fields": {
+      "name": "Refrigirator Medium",
+      "vol": 0.9
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 11,
+    "fields": {
+      "name": "Large box",
+      "vol": 0.2
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 12,
+    "fields": {
+      "name": "Crates",
+      "vol": 0.1
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 13,
+    "fields": {
+      "name": "Washing machine",
+      "vol": 0.4
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 14,
+    "fields": {
+      "name": "Dryer",
+      "vol": 0.4
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 15,
+    "fields": {
+      "name": "Single bed",
+      "vol": 2.2
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 16,
+    "fields": {
+      "name": "King size bed",
+      "vol": 3
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 17,
+    "fields": {
+      "name": "Baby cot",
+      "vol": 0.8
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 18,
+    "fields": {
+      "name": "Changing table",
+      "vol": 0.4
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 19,
+    "fields": {
+      "name": "Single bed",
+      "vol": 2.2
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 20,
+    "fields": {
+      "name": "Matress",
+      "vol": 0.3
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 21,
+    "fields": {
+      "name": "Potted plant Large",
+      "vol": 0.5
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 22,
+    "fields": {
+      "name": "Potted plant Medium",
+      "vol": 0.2
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 23,
+    "fields": {
+      "name": "Garden tools",
+      "vol": 0
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 24,
+    "fields": {
+      "name": "Workshop desk",
+      "vol": 0
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 25,
+    "fields": {
+      "name": "King size bed",
+      "vol": 2.5
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 26,
+    "fields": {
+      "name": "Bedside table",
+      "vol": 0.2
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 27,
+    "fields": {
+      "name": "Shoe rack",
+      "vol": 0.4
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 28,
+    "fields": {
+      "name": "Potted plands",
+      "vol": 0.2
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 29,
+    "fields": {
+      "name": "Gas cylinder",
+      "vol": 0.2
+    }
+  },
+  {
+    "model": "core.item",
+    "pk": 30,
+    "fields": {
+      "name": "P.B.O box",
+      "vol": 0
+    }
+  }
+]

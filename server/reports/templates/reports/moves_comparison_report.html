@@ -1,0 +1,227 @@
+{% extends 'core/base.html' %}
+{% load staticfiles %}
+{% block context_styles %}
+<link href="{% static 'core/components/datepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+<link href="{% static 'core/components/select2/css/select2.min.css' %}" rel="stylesheet">
+<link href="{% static 'core/components/buttons/buttons.dataTables.min.css' %}" rel="stylesheet">
+<link href="{% static 'core/components/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body_block %}
+<div class="container">
+  <div class="page-header">
+    <ol class="breadcrumb">
+
+    <li><a href="{% url 'reports:reports' %}">
+    <span class="glyphicon glyphicon-stats"></span>
+    Select a report</a></li>
+    <li class="active"><a href="">Move report</a></li>
+  </ol>
+</div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form action="{% url 'reports:moves_comparison' %}" method="post">
+        {% csrf_token %}
+      <h4>Filters</h4>
+      <div class="col-md-6">
+        <div class="form-group">
+        <label for="">From:</label>
+        <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+              <input name="from_time" required type='text' class="form-control" id='from_time' value="{{old.from_time}}"/>
+            </div>
+      </div>
+      </div>
+            <div class="col-md-6">
+        <div class="form-group">
+        <label for="exampleInputEmail1">To:</label>
+           <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+              <input name="to_time" required type='text' class="form-control" id='to_time' value="{{old.to_time}}"/>
+            </div>
+      </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+        <label for="exampleInputEmail1">Move Status</label>
+        <select name="move_status_1" class="form-control">
+        {% if old %}
+          {% for status in statuses %}
+          <option {% if old.move_status_1 == status.name %} selected {% endif %} value="{{status.name}}">{{status.name}}</option>
+          {% endfor %}
+        {% else %}
+          {% for status in statuses %}
+          <option value="{{status.name}}">{{status.name}}</option>
+          {% endfor %}
+        {% endif %}
+        </select>
+      </div>
+      </div>
+          <div class="col-md-2">
+        <div class="form-group">
+        <label for="exampleInputEmail1">Move Status</label>
+        <select name="move_status_2" class="form-control">
+        {% if old %}
+          {% for status in statuses %}
+          <option {% if old.move_status_2 == status.name %} selected {% endif %} value="{{status.name}}">{{status.name}}</option>
+          {% endfor %}
+        {% else %}
+          {% for status in statuses %}
+          <option value="{{status.name}}">{{status.name}}</option>
+          {% endfor %}
+        {% endif %}
+        </select>
+      </div>
+      </div>
+
+      <!--<div class="col-md-2">-->
+        <!--<div class="form-group">-->
+          <!--<label for="exampleInputEmail1">Frequency</label>-->
+        <!--<select name="frequency" class="form-control">-->
+          <!--<option {% if old.frequency == 'daily' %} selected {% endif %} value="daily">Daily</option>-->
+          <!--<option {% if old.frequency == 'monthly' %} selected {% endif %} value="monthly">Monthly</option>-->
+        <!--</select>-->
+      <!--</div>-->
+      <!--</div>-->
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Move Rep</label>
+        <select name="move_rep" class="form-control">
+          <option value="0">All</option>
+          {% for e in employees%}
+          <option {% if old.move_rep == e.id|slugify %} selected {% endif %} value="{{e.id}}" >{{ e.first_name }} {{ e.last_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      </div>
+
+      <!--<div class="col-md-2">-->
+        <!--<div class="form-group">-->
+           <!--<label for="exampleInputEmail1">Move Supervisor</label>-->
+        <!--<select name="move_sup" class="form-control">-->
+          <!--<option value="0">All</option>-->
+        <!--</select>-->
+          <!--</div>-->
+        <!--</div>-->
+        <div class="col-md-2">
+          <div class="form-group">
+            <label style="color:white">label</label>
+            <button class="btn btn-primary" type="submit">Load graph data</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <hr>
+    <div class="container">
+      <canvas id="myChart1" width="800" height="400"></canvas>
+    </div>
+  </div>
+  <p>Total: {{moves.count}}</p>
+  <div class="panel panel-default">
+    <div class="panel-body">
+<!--  <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Customer</th>
+          <th>Date/Time</th>
+        </tr>
+        {% for move in moves %}
+        <tr>
+
+          <td>{{ move.move.id }}</td>
+          <td>{{ move.move.customer.full_name }}</td>
+          <td>{{ move.move.created_time }}</td>
+
+        </tr>
+        {% endfor %}
+      </table>  -->
+<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th>ID</th>
+              <th>Status</th>
+            <th>Customer</th>
+            <th>Date/Time</th>
+          </tr>
+        </thead>
+
+        <tfoot>
+          <tr>
+            <th>ID</th>
+              <th>Status</th>
+            <th>Customer</th>
+            <th>Date/Time</th>
+          </tr>
+        </tfoot>
+
+        <tbody>
+            {% for move in moves_1 %}
+            <tr>
+                <td>{{ move.move.id }}</td>
+                <td>{{ old.move_status_1 }}</td>
+              <td>{{ move.move.customer.full_name }}</td>
+              <td>{{ move.move.created_time }}</td>
+
+            </tr>
+            {% endfor %}
+
+            {% for move in moves_2 %}
+            <tr>
+                <td>{{ move.move.id }}</td>
+                <td>{{ old.move_status_2 }}</td>
+              <td>{{ move.move.customer.full_name }}</td>
+              <td>{{ move.move.created_time }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block context_scripts %}
+<script src="{% static 'core/components/chart.js/Chart.js' %}" ></script>
+<script src="{% static 'core/components/moment/moment.js' %}" ></script>
+<script src="{% static 'core/components/buttons/jquery-1.11.3.min.js' %}" ></script>
+<script src="{% static 'core/components/buttons/jquery.dataTables.min.js' %}" ></script>
+<script src="{% static 'core/components/buttons/dataTables.buttons.min.js' %}" ></script>
+<script src="{% static 'core/components/buttons/buttons.flash.min.js' %}" ></script>
+<script src="{% static 'core/components/buttons/jszip.min.js' %}" ></script>
+<script src="{% static 'core/components/buttons/pdfmake.min.js' %}" ></script>
+<script src="{% static 'core/components/buttons/vfs_fonts.js' %}" ></script>
+<script src="{% static 'core/components/buttons/buttons.html5.min.js' %}" ></script>
+<script src="{% static 'core/components/buttons/buttons.print.min.js' %}" ></script>
+<script src="{% static 'core/components/datepicker/js/bootstrap-datetimepicker.js' %}" ></script>
+<script src="{% static 'core/scripts/report_moves.js' %}" ></script>
+<script>
+$(document).ready(function () {
+    // graph data
+    var data1 = {
+        labels: {{labels|safe}},
+        datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: {{data}}
+        }
+        ]
+    };
+
+    var ctx1 = document.getElementById("myChart1").getContext("2d");
+    var myBarChart = new Chart(ctx1).Bar(data1);
+  });
+</script>
+{% endblock %}
+
+
+
+
+
+
+
+

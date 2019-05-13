@@ -1,0 +1,57 @@
+<div class="progress">
+
+  {% if move.move_status.name == 'inquiry'  %}
+  <div class="progress-bar progress-bar-default" style="width: 11%">
+    Inquiry
+  </div>
+  {% endif %}
+
+  {% if move.move_status.name == 'pre-survey'  %}
+  <div class="progress-bar progress-bar-default" style="width: 22%">
+    Pre-survey
+  </div>
+  {% endif %}
+
+  {% if move.move_status.name == 'survey'  %}
+  <div class="progress-bar progress-bar-default" style="width: 33%">
+    Survey
+  </div>
+  {% endif %}
+
+  {% if move.move_status.name == 'quotation'  %}
+  <div class="progress-bar progress-bar-default" style="width: 44%">
+    Quotation
+  </div>
+  {% endif %}
+
+  {% if move.move_status.name == 'invoice'  %}
+  <div class="progress-bar progress-bar-default" style="width: 55%">
+    Invoice
+  </div>
+  {% endif %}
+
+  {% if move.move_status.name == 'pre-move'  %}
+  <div class="progress-bar progress-bar-default" style="width: 66%">
+    Pre-move
+  </div>
+  {% endif %}
+
+  {% if move.move_status.name == 'move'  %}
+  <div class="progress-bar progress-bar-default" style="width: 77%">
+    Move
+  </div>
+  {% endif %}
+
+  {% if move.move_status.name == 'post-move'  %}
+  <div class="progress-bar progress-bar-default" style="width: 88%">
+    Post-move
+  </div>
+  {% endif %}
+
+  {% if move.move_status.name == 'complete'  %}
+  <div class="progress-bar progress-bar-default" style="width: 100%">
+    Complete
+  </div>
+  {% endif %}
+
+</div>

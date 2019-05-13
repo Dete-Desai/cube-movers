@@ -1,0 +1,25 @@
+<!-- approve credit-->
+{% extends 'core/common/modal_base.html' %}
+{% load bootstrap3 %}
+{% block id %}approvecreditModal{% endblock %}
+{% block title %} Create Inquiry {% endblock %}
+{% block body %}
+  <form method="post" action="{% url 'invoices:confirm' move_id=move.id %}">
+       {% csrf_token %}
+       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-edit"></span> Approve credit</h4>
+      </div>
+      <div class="modal-body">
+        <p>Approving will take the Move record to the next phase. Are you sure you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button data-loading-text="Loading..." type="submit" id="confirmpaymentButton" class="btn btn-primary">Yes i'm sure</button>
+      </div>
+    </form>
+{% endblock %}
+
+
+
+

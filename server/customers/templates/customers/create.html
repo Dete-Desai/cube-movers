@@ -1,0 +1,44 @@
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block title %}Inquiries - Cube Movers{% endblock %}
+
+{% block label_block %}<span class="glyphicon glyphicon-question-sign"></span> Inquiries {% endblock %}
+{% block content %}
+
+<div class="container">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li><a href="{% url 'inquiry:list' %}"><span class="glyphicon glyphicon-list-alt"></span> Inquiries</a></li>
+        <li class="active" ><a href="{% url 'customers:create' %}"><span class="glyphicon glyphicon-copy"></span> Create Inquiry</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane"></div>
+        <div role="tabpanel" class="tab-pane active">
+          <div class="col-md-8"><br>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-copy"></span><strong> Enter customer details </strong></h3>
+              </div>
+              <div class="panel-body">
+
+                <form name="customer_form" role="form" method="post" action="{% url 'customers:create' %}" novalidate>
+                  {% csrf_token %}
+                  {% for field in form %}
+                    <div class="form-group">
+                        {% bootstrap_field field %}
+
+                    </div>
+                {% endfor %}
+
+              <button  type="submit" data-loading-text="Loading..." class="btn btn-md btn-block btn-primary btn-lg" type="submit" >Add customer</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

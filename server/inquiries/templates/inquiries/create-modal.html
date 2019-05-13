@@ -1,0 +1,26 @@
+{% extends 'core/common/modal_base.html' %}
+{% load bootstrap3 %}
+{% block id %}createInquiryModal{% endblock %}
+{% block title %} Create Inquiry {% endblock %}
+{% block body %}
+  <p>This will begin a new move job for this customer. Are you sure you want to proceed?</p>
+  <form action="{% url 'inquiry:create' customer_id=customer.id %}" method="post">
+      {% csrf_token %}
+      {% for field in inquiry_form %}
+          <div class="form-group">
+              {% bootstrap_field field %}
+
+          </div>
+      {% endfor %}
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      <button  type="submit" class="btn btn-primary">Yes I'm sure</button>
+    </div>
+  </form>
+
+{% endblock %}
+
+
+
+

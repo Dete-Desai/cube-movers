@@ -1,0 +1,53 @@
+
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+{% block title %}Moves - Cube Movers{% endblock %}
+  {% block label_block %}
+  <ol class="breadcrumb">
+  <li><a href="{% url 'inquiry:view' move.id %}">
+  <span class="glyphicon glyphicon-list-alt"></span>
+  Move record</a></li>
+  <li class="active">
+  <span class="glyphicon glyphicon-info-sign"></span>
+  Further details</li>
+</ol>
+  {% endblock %}
+  {% block content %}
+
+  <div class="container">
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active">
+        <div class="col-md-10"><br>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> {{ move.customer.full_name }}</h3>
+            </div>
+            <div class="panel-body">
+              {% include 'moves/packlist_details_tabs.html' with details='active' move_obj=move %}
+          <!-- Tab panes -->
+            <div class="tab-content">
+              <form method="post" action="{% url 'moves:details' move.id %}" novalidate>
+                {% csrf_token %}
+                  {% csrf_token %}
+                  {% for field in form %}
+                    <div class="form-group">
+                        {% bootstrap_field field %}
+
+                    </div>
+                {% endfor %}
+                 <button type="submit" class="btn btn-primary btn-block">Save details</button>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+
+    {% block context_scripts %}
+  <script src="{% static 'core/components/moment/moment.js' %}" ></script>
+  <script src="{% static 'core/components/datepicker/js/bootstrap-datetimepicker.js' %}" ></script>
+  <script src="{% static 'core/scripts/move_further_details.js' %}" ></script>
+    {% endblock %}

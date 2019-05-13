@@ -1,0 +1,241 @@
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% load group_check %}
+{% block title %}Overview - Cube Movers{% endblock %}
+{% block label_block %}<span class="glyphicon glyphicon-dashboard"></span> Overview {% endblock %}
+{% block content %}
+<div class="row placeholders overview">
+    {% if request.user|group_check:"customer_care" %}
+    <div class="col-xs-12 col-sm-6 col-md-3 placeholder">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <div class="large-icon">
+                        <span class="glyphicon glyphicon-question-sign"></span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <p class="large-text">{{ inquiries }}</p>
+                        <p class="overview-text">Inquiries</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer warning"><a href="{% url 'inquiry:list' %}"><span class="pull-left">View more</span> <span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></a><i class="clearfix"></i></div>
+        </div>
+    </div>
+    {% endif %}
+    {% if request.user|group_check:"customer_care" %}
+    <div class="col-xs-12 col-sm-6 col-md-3 placeholder">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <div class="large-icon">
+                        <span class="glyphicon glyphicon-eye-close"></span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <p class="large-text">{{ pre_surveys }}</p>
+                        <p class="overview-text">Pre surveys</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer warning"><a href="{% url 'surveys:presurvey_list' %}"><span class="pull-left">View more</span> <span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></a><i class="clearfix"></i></div>
+        </div>
+    </div>
+    {% endif %}
+    {% if request.user|group_check:"customer_care, move_reps" %}
+    <div class="col-xs-12 col-sm-6 col-md-3 placeholder">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <div class="large-icon">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <p class="large-text">{{ surveys }}</p>
+                        <p class="overview-text">Surveys</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer warning"><a href="{% url 'surveys:list' %}"><span class="pull-left">View more</span> <span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></a><i class="clearfix"></i></div>
+        </div>
+    </div>
+    {% endif %}
+    {% if request.user|group_check:"customer_care, move_reps" %}
+    <div class="col-xs-12 col-sm-6 col-md-3 placeholder">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <div class="large-icon">
+                        <span class="glyphicon glyphicon-tag"></span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <p class="large-text">{{ quotes }}</p>
+                        <p class="overview-text">Quotes</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer warning"><a href="{% url 'quotations:list' %}"><span class="pull-left">View more</span> <span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></a><i class="clearfix"></i></div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="row placeholders overview">
+    {% if request.user|group_check:"customer_care, move_reps" %}
+    <div class="col-xs-12 col-sm-6 col-md-3 placeholder">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <div class="large-icon">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <p class="large-text">{{ rejected_quotes }}</p>
+                        <p class="overview-text">Rejected Quotes</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer warning"><a href="{% url 'quotations:rejected_list' %}"><span class="pull-left">View more</span> <span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></a><i class="clearfix"></i></div>
+        </div>
+    </div>
+    {% endif %}
+    {% if request.user|group_check:"manager, accountant" %}
+    <div class="col-xs-12 col-sm-6 col-md-3 placeholder">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <div class="large-icon">
+                        <span class="glyphicon glyphicon-usd"></span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <p class="large-text">{{ invoices }}</p>
+                        <p class="overview-text">Invoices</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer warning"><a href="{% url 'invoices:list' %}"><span class="pull-left">View more</span> <span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></a><i class="clearfix"></i></div>
+        </div>
+    </div>
+    {% endif %}
+    {% if request.user|group_check:"move_manager" %}
+    <div class="col-xs-12 col-sm-6 col-md-3 placeholder">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <div class="large-icon">
+                        <span class="glyphicon glyphicon-briefcase"></span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <p class="large-text">{{ pre_moves }}</p>
+                        <p class="overview-text">Pre moves</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer warning"><a href="{% url 'moves:premoves_list' %}"><span class="pull-left">View more</span> <span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></a><i class="clearfix"></i></div>
+        </div>
+    </div>
+    {% endif %}
+    {% if request.user|group_check:"move_manager, move_supervisor" %}
+    <div class="col-xs-12 col-sm-6 col-md-3 placeholder">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <div class="large-icon">
+                        <span class="glyphicon glyphicon-transfer"></span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <p class="large-text">{{ moves }}</p>
+                        <p class="overview-text">Moves</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer warning"><a href="{% url 'moves:list' %}"><span class="pull-left">View more</span> <span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></a><i class="clearfix"></i></div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="row placeholders overview">
+    {% if request.user|group_check:"move_manager, move_supervisor, quality_assuarance" %}
+    <div class="col-xs-12 col-sm-6 col-md-3 placeholder">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <div class="large-icon">
+                        <span class="glyphicon glyphicon-heart"></span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <p class="large-text">{{ post_moves }}</p>
+                        <p class="overview-text">Post Moves</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer warning"><a href="{% url 'moves:postmoves_list' %}"><span class="pull-left">View more</span> <span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></a><i class="clearfix"></i></div>
+        </div>
+    </div>
+    {% endif %}
+    {% if request.user|group_check:"move_manager,move_supervisor,quality_assuarance" %}
+    <div class="col-xs-12 col-sm-6 col-md-3 placeholder">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <div class="large-icon">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <p class="large-text">{{ complete }}</p>
+                        <p class="overview-text">Completed moves</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer warning"><a href="{% url 'moves:complete_list' %}"><span class="pull-left">View more</span> <span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></a><i class="clearfix"></i></div>
+        </div>
+    </div>
+    {% endif %}
+    {% if request.user|group_check:"move_manager, move_supervisor, quality_assuarance, customer_care, move_reps" %}
+    <div class="col-xs-12 col-sm-6 col-md-3 placeholder">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <div class="large-icon">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div>
+                        <p class="large-text">{{ cancelled_moves }}</p>
+                        <p class="overview-text">Cancelled Moves</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer warning"><a href="{% url 'moves:cancelled_list' %}"><span class="pull-left">View more</span> <span class="glyphicon glyphicon-circle-arrow-right pull-right"></span></a><i class="clearfix"></i></div>
+        </div>
+    </div>
+    {% endif %}
+
+
+</div>
+
+</div>
+{% endblock %}

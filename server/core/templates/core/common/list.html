@@ -1,0 +1,24 @@
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% block title %}  {% endblock %} - Cube Movers
+{% block label_block %} {% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active">
+      <div class="col-md-10"><br>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            {% block heading %} {% endblock %}
+          </div>
+          <div class="panel-body">
+
+              {% block table %} {% endblock %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

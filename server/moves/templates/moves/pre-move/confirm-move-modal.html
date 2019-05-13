@@ -1,0 +1,43 @@
+<!-- Confirm move-->
+{% extends 'core/common/modal_base.html' %}
+{% load bootstrap3 %}
+{% block id %}confirmMoveModal{% endblock %}
+{% block title %} Confirm Move {% endblock %}
+{% block body %}
+  <form method="post" action="{% url 'moves:confirm'  move_id=move.id state='post_move'  %}">
+       {% csrf_token %}
+       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-ok"></span> Confirm move</h4>
+      </div>
+      <div class="modal-body">
+        <div class="panel panel-default">
+          <div class="panel-body">
+           <table class="table">
+            <tr>
+              <th>Item </th>
+              <th>Volume (CBM)</th>
+              <th>Quantity</th>
+            </tr>
+            {% for item in packlist_items %}
+            <tr>
+                <td>{% if item.item %}{{ item.item.name }}{% else %}{{ item.item_backup}}{% endif%}</td>
+                <td>{{ item.vol }}</td>
+                <td>{{ item.qty }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button data-loading-text="Loading..." type="submit" class="btn btn-primary">Confirm move</button>
+      </div>
+    </form>
+{% endblock %}
+
+
+
+
+

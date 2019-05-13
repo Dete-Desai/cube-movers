@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+<div class="container">
+  <div class="page-header">
+   <ol class="breadcrumb">
+    <li><a href="">
+    <span class="glyphicon glyphicon-stats"></span>
+    Select a report</a></li>
+  </ol>
+</div>
+
+  <div class="list-group">
+    <a type="button" class="list-group-item" href="{% url 'reports:moves' %}">General Move Reports</a>
+    <a type="button" class="list-group-item" href="{% url 'reports:moves_comparison' %}">Job Status Comparison</a>
+    <a type="button" class="list-group-item" href="{% url 'reports:quotations_pending' %}">Pending Quotations</a>
+    <a type="button" class="list-group-item" href="{% url 'reports:quotations_turnaround' %}">Quotation Turnaround Time</a>
+    <a type="button" class="list-group-item" href="{% url 'reports:booking_order' %}">Booking Orders</a>
+    <a type="button" class="list-group-item" href="{% url 'reports:removal' %}">Move Removals</a>
+    <a type="button" class="list-group-item" href="{% url 'reports:personnel_transport' %}">Move Personnel and Transport</a>
+      <a type="button" class="list-group-item" href="{% url 'reports:delight' %}">Delight</a>
+    <a type="button" class="list-group-item" target="_blank" href="/helpdesk/reports/">Helpdesk Reports</a>
+  </div>
+
+  </div>
+{% endblock %}

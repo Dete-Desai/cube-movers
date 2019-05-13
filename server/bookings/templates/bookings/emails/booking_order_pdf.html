@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+	<div style="margin: 0 auto; text-align:center;">
+		<div style="padding-top: 10px;padding-bottom: 10px;">
+			{% include 'core/common/email_header.html' %}
+      <h1> <span style="font-size:20px;color:#ffcc14; text-transform:uppercase;">Booking Order Report</span><br></h1>
+		</div>
+		</div><br>
+<div style="padding-left:50px">
+<table>
+  <tr>
+    <td>Client's name</td>
+    <td>{{ move.customer.full_name }}</td>
+  </tr>
+  <tr>
+    <td>Phone number</td>
+    <td>{{ move.customer.phone_number }}</td>
+  </tr>
+  <tr>
+    <td>Email address</td>
+    <td>{{ move.customer.user.email }}</td>
+  </tr>
+  <tr>
+    <td>Job type</td>
+    <td>{{move.move_type.name}}</td>
+  </tr>
+  <tr>
+    <td>Date of job</td>
+    <td>{{move.move_date}}</td>
+  </tr>
+  <tr>
+    <td>Origin</td>
+    <td>{{move.property_details.primary_area_name}}</td>
+  </tr>
+  <tr>
+    <td>Origin floor</td>
+    <td>{{move.property_details.floor}}</td>
+  </tr>
+  <tr>
+    <td>Origin Street</td>
+    <td>{{move.property_details.street_name}}</td>
+  </tr>
+  <tr>
+    <td>Origin Landmarks</td>
+    <td>{{move.property_details.land_marks}}</td>
+  </tr>
+  <tr>
+    <td>Destination</td>
+    {% if move.property_destination_details.primary_area_name %}
+    <td>{{move.property_destination_details.primary_area_name}}</td>
+    {% else %}
+    <td>N/A</td>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>Destination floor</td>
+    {% if move.property_destination_details.floor %}
+    <td>{{move.property_destination_details.floor}}</td>
+    {% else %}
+    <td>N/A</td>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>Destination street name</td>
+    {% if move.property_destination_details.street_name %}
+    <td>{{move.property_destination_details.street_name}}</td>
+    {% else %}
+    <td>N/A</td>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>Destination landmarks</td>
+    {% if move.property_destination_details.land_marks %}
+    <td>{{move.property_destination_details.land_marks}}</td>
+    {% else %}
+    <td>N/A</td>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>Status</td>
+    <td>{{move.move_status.name}}</td>
+  </tr>
+  <tr>
+    <td>Move representative</td>
+    <td>{{move.survey.surveyor.get_full_name}}</td>
+  </tr>
+  <tr>
+    <td>Volume (Cbm)</td>
+    <td>{{move.checklist.total_vol}}</td>
+  </tr>
+  {% for type in types %}
+    <tr>
+      <td>
+        {{type.name}}
+      </td>
+      <td>
+        <ol>
+          {% for item in quote_items %}
+            {% if item.quote_item_type == type %}
+            <li>{{ item.item }} ({{item.units}})</li>
+            {% endif %}
+          {% endfor %}
+        </ol>
+      </td>
+    </tr>
+  {% endfor %}
+  <tr>
+    <td>Billing</td>
+    <td>VAT {{move.move_type.currency}} {{vat}}</td>
+  </tr>
+  <tr>
+    <td>Billing</td>
+    <td>Total {{move.move_type.currency}} {{quotation.charge_out_price}}</td>
+  </tr>
+  <tr>
+    <td>Special instructions</td>
+    <td>{{move.special_instructions}}</td>
+  </tr>
+  <tr>
+    <td>Accessibility and Directions instructions</td>
+    <td>{{move.accessibility_instructions}}</td>
+  </tr>
+</table>
+<br><br>
+<table>
+  <td>THE TEAM IS PERSONALLY RESPONSIBLE FOR THE CLIENT'S PERSONAL AND IMPORTANT ITEMS <br>
+  THE MOST IMPORTANT SECTOR IS THE <b>UNPACKING</b> AND FINISHING OF THE JOB
+  </td>
+</table>
+<br><br>
+<table>
+	<tr>
+		<td>MATERIALS ISSUES BY ...................................................</td>
+		<td>DATE ..................................................................</td>
+	</tr>
+	<tr>
+		<td>RETURNED MATERIALS (IF ANY) CHECKED AND
+    RECIEVED BY: ..............................................................</td>
+		<td>DATE ..................................................................</td>
+	</tr>
+</table>
+</div>
+{% include 'core/common/email_disclamer.txt' %}
+</body>
+</html>

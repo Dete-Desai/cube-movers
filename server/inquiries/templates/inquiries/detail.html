@@ -1,0 +1,73 @@
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% load ceil %}
+{% block title %}Move record - Cube Movers{% endblock %}
+{% block label_block %}
+<ol class="breadcrumb">
+  <li class="active"><a href="">
+  <span class="glyphicon glyphicon-list-alt"></span>
+  Move record</a></li>
+</ol>
+{% endblock %}
+{% block content %}
+
+{% load humanize %}
+<div class="container">
+  <div class="col-md-10">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"></span> {{ move.customer.full_name }}</h3>
+
+      </div>
+      <div class="panel-body">
+
+          <div class="row" style="margin-bottom:20px;">
+              <div class="col-md-9">
+                  <label>Customer status</label>
+              </div>
+              {% if request.user.is_superuser %}
+            <div class="col-md-3">
+                  <a href="{% url 'moves:cancel' move_id=move.id %}" class="btn btn-danger pull-right">Cancel Move</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- progress bar -->
+        {% include 'core/common/progress_bar.html' %}
+        <hr>
+        <!-- customer details -->
+        {% include 'customers/details-inline.html' %}
+
+        <!-- property details -->
+        {% include 'inquiries/property_details-inline.html' %}
+
+         <!-- survey details -->
+        {% include 'surveys/details-inline.html' %}
+
+         <!-- quotation details -->
+        {% include 'quotations/details-inline.html' %}
+
+        <!-- booking details -->
+        {% include 'bookings/details-inline.html' %}
+
+        <!-- invoice details -->
+        {% include 'invoices/details-inline.html' %}
+
+        <!-- pre-move details -->
+        {% include 'moves/pre-move/details-inline.html' %}
+
+        <!-- post-move details -->
+        {% include 'moves/post-move/details-inline.html' %}
+
+  </div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block context_scripts %}
+<script src="{% static 'core/components/moment/moment.js' %}" ></script>
+<script src="{% static 'core/components/datepicker/js/bootstrap-datetimepicker.js' %}" ></script>
+<script src="{% static 'core/components/select2/js/select2.min.js' %}" ></script>
+<script src="{% static 'core/scripts/move_show.js' %}" ></script>
+{% endblock %}

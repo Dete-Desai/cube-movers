@@ -1,0 +1,233 @@
+
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% block title %}Checklist - Cube Movers{% endblock %}
+
+{% block label_block %}
+{% include 'surveys/common/breadcrumbs.html' with param=checklist.move.id title='Check list' %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> {{ checklist.move.customer.full_name }}</h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="{% url 'surveys:checklist' checklist.id %}" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-list"></span> Survey list</a></li>
+          <li role="presentation"><a href="{% url 'surveys:destination' checklist.move.id %}" ><span class="glyphicon glyphicon-map-marker"></span> Destination</a></li>
+          <li role="presentation"><a href="{% url 'quotations:view' checklist.quotation.id %}" aria-controls="profile" role="tab"><span class="glyphicon glyphicon-tag"></span> Costing Sheet</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="home"><br>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                 <h3 class="panel-title">{% if move_type == "House Move" %}House Move{% elif move_type == "Office Move" %}Office Move{% elif move_type == "Storage and Warehousing" %}Storage and Warehousing{% endif %}</h3>
+               </div>
+               <div class="panel-body">
+                {% for room in rooms|dictsort:"name" %}
+                <div class="page-header">
+                  <a role="button" data-toggle="collapse" href="#room-{{room.id}}" aria-expanded="false" aria-controls="room-{{room.id}}">
+                    {{room.name}} <span class="caret"></span>
+                  </a>
+                </div>
+
+                <div class="collapse" id="room-{{room.id}}">
+                  {% if room.items.all %}
+                  <form method="post" action="{% url 'surveys:checklist_add_existing' checklist_id=checklist.id %}" class="form-horizontal">
+                    {% csrf_token %}
+                    <input type="hidden" name="room_id" value="{{ room.id }}" >
+                    {% if offices %}
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Select an Office</label>
+                      <div class='col-md-6'>
+                        <select class="form-control" name="office">
+                          {% for office in offices %}
+                          <option value="{{ office.id }}">{{office.office_name}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% for item in room.items.all|dictsort:"name" %}
+                    <div class="form-group">
+                      <label for='item_{{item.id}}' class="col-sm-5 control-label">{{item.name}}</label>
+                      <div class='col-md-6'>
+                        <input type='text' value='0' id='item_{{item.id}}' name='item_{{item.id}}' class="form-control">
+                      </div>
+                    </div>
+                    {% endfor %}
+                    <div class="form-group">
+                      <div class="col-sm-offset-5 col-sm-6">
+                        <button class="btn btn-primary btn-md " type="submit" href="#" role="button"><span class="glyphicon glyphicon-plus"></span><b> Add existing item to list</b></button>
+                      </div>
+                    </div>
+                  </form>
+                  {% else %}
+                  <p class="text-info">Please add items to this room first before the form can be displayed</p>
+                  {% endif %}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Add new item</h3>
+              </div>
+              <div class="panel-body">
+                <form method="post" action="{% url 'surveys:checklist_add_new' checklist_id=checklist.id%}">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    {% if form.room_id.errors %}
+                    <div class="has-error">
+                      {% endif %}
+                      <label for="room_list" class="control-label">Rooms</label>
+                      <select required name="room_id" class="form-control" style="width: 100%"  id="new-room-list">
+                       <option></option>
+                       {% for room in rooms %}
+                       <option value="{{ room.id }}">{{ room.name }}</option>
+                       {% endfor %}
+                     </select>
+                     {% if form.room_id.errors %}
+                   </div>
+                   {% endif %}
+                 </div>
+
+                 {% if offices %}
+                 <div class="form-group">
+                   {% if form.office.errors %}
+                   <div class="has-error">
+                     {% endif %}
+
+                     <div class="form-group">
+                       <label for="" class="control-label">Select an Office</label>
+                       <select class="form-control" name="office">
+                         {% for office in offices %}
+                         <option value="{{ office.id }}">{{office.office_name}}</option>
+                         {% endfor %}
+                       </select>
+                     </div>
+
+                     {% if form.office.errors %}
+                   </div>
+                   {% endif %}
+                 </div>
+                 {% endif %}
+
+                 <div class="form-group">
+                  {% if form.name.errors %}
+                  <div class="has-error">
+                    {% endif %}
+                    <label for="new_item" class="control-label">Item</label>
+                    <input type="text" name="name" class="form-control" id="new_item" placeholder="E.g. laptop">
+                    {% if form.name.errors %}
+                  </div>
+                  {% endif %}
+                </div>
+
+                <div class="form-group">
+                  {% if form.vol.errors %}
+                  <div class="has-error">
+                    {% endif %}
+                    <label for="quantity" class="control-label">Volume</label>
+                    <input type="text" name="vol" class="form-control" id="quantity" placeholder="E.g. 1">
+                    {% if form.vol.errors %}
+                  </div>
+                  {% endif %}
+                </div>
+
+                <div class="form-group">
+                  {% if form.quantity_id.errors %}
+                  <div class="has-error">
+                    {% endif %}
+                    <label for="quantity" class="control-label">Quantity</label>
+                    <input type="number" name="qty" min="0" class="form-control" id="quantity" placeholder="E.g. 1">
+                    {% if form.quantity_id.errors %}
+                  </div>
+                  {% endif %}
+                </div>
+
+                <div class="text-center">
+                  <button class="btn btn-primary btn-md" href="#" role="button"><span class="glyphicon glyphicon-plus"></span><b> Add new item to list</b></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 {% if not checklist.move.special_instructions %} has-error {% endif %}">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Add Instructions - {% if not checklist.move.special_instructions %}
+                <span class="label label-danger">Please ensure you have added instructions</span>  {% endif %} </h3>
+            </div>
+            <div class="panel-body">
+              <form action="{% url 'surveys:instructions' checklist_id=checklist.id %}" method="post">
+                {% csrf_token %}
+                <p>Special Instructions</p>
+                <textarea name="special_instructions" class="form-control" rows="3" placeholder="E.g take apart wall unit before packing" required>{% if checklist.move.special_instructions %} {{checklist.move.special_instructions}} {% endif %}</textarea><br>
+                <p>Accessibility and Directions Instructions</p>
+                <textarea name="access_instructions" class="form-control" rows="3" placeholder="E.g very accessible" required>{% if checklist.move.accessibility_instructions %} {{checklist.move.accessibility_instructions}} {% endif %}</textarea><br>
+                <div class="text-center">
+                  <button class="btn btn-primary btn-md" type="submit" href="#" role="button"><span class="glyphicon glyphicon-plus"></span><b> Save instructions</b></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-12">
+    <h4 class="page-header"><span class="glyphicon glyphicon-sort-by-attributes-alt"></span> Selected items</h4>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h4 class="pull-left">Item list</h4>
+        <h4 class="pull-right"><span class="label label-info">Total volume : {{ checklist.total_vol }} CBMs </span></h4></b><br>
+        <table class="table">
+          <tr>
+            <th>Room</th>
+            {% if move_type == "Office Move" %}<th>Office</th>{% endif %}
+            <th>Item </th>
+            <th>Volume</th>
+            <th>Quantity</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          {% if checklist_items %}
+          {% for item in checklist_items %}
+          <tr>
+            <td>{{ item.room.name }}</td>
+            {% if move_type == "Office Move" %}<td>{{item.office.office_name}}</td>{% endif %}
+            <td>{% if item.item %}{{ item.item.name }}{% else %}{{ item.item_backup}}{% endif%}</td>
+            <td>{{ item.vol }}</td>
+            <td>{{ item.qty }}</td>
+            <td><a data-toggle="modal" data-target="#editModal" data-id="{{item.id}}" data-room="{{item.room.id}}" data-item="{{item.item}}" data-volume="{{item.vol}}" data-qty="{{item.qty}}"  data-action="edit" href=""><span class="glyphicon glyphicon-pencil"></span></a></td>
+            <td><a data-toggle="modal" data-target="#deleteModal" data-id="{{item.id}}" data-item="{{item.item}}" data-action="delete" href=""><span class="glyphicon glyphicon-trash"></span></a></td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+{% include 'surveys/checklist-item-delete-modal.html' %}
+{% include 'surveys/checklist-item-edit-modal.html' %}
+{% endblock %}
+
+{% block context_scripts %}
+<script src="{% static 'core/components/select2/js/select2.min.js' %}" ></script>
+<script src="{% static 'core/scripts/checklist.js' %}" ></script>
+{% endblock %}

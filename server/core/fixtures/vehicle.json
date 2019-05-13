@@ -1,0 +1,22 @@
+[
+  {
+    "model": "core.vehicle",
+    "pk": 1,
+    "fields": {
+      "make": "TOYOTA",
+      "model": "COROLLA",
+      "registration": "KAN 881X",
+      "cbm": "POOL CAR"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 2,
+    "fields": {
+      "make": "MERCEDES BENZ",
+      "model": "ACTROS",
+      "registration": "KAU 258Z",
+      "cbm": "30"
+    }
+  }
+]

@@ -1,0 +1,208 @@
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% block title %}Checklist - Cube Movers{% endblock %}
+{% block label_block %}
+  {% include 'surveys/common/breadcrumbs.html' with param=move.id title='Edit quote' %}
+{% endblock %}
+{% block content %}
+
+{% load humanize %}
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+       <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> {{ move.customer.full_name }}</h3>
+    </div>
+    <div class="panel-body">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li><a href="{% url 'surveys:checklist' quote.checklist.id %}"><span class="glyphicon glyphicon-list-alt"></span> Survey list</a></li>
+        <li role="presentation"><a href="{% url 'surveys:destination' quote.checklist.move.id %}" ><span class="glyphicon glyphicon-map-marker"></span> Destination</a></li>
+        <li class="active"><a href="{% url 'quotations:view' quote.id %}"><span class="glyphicon glyphicon-tag"></span> Costing Sheet </a></li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane">
+        </div>
+        <div role="tabpanel" class="tab-pane active">
+          <div class="col-md-12"><br>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Add quote items</h3>
+              </div>
+              <div class="panel-body">
+               <form method="post" action="{% url 'quotations:add_survey' quote.id %}" class="form-horizontal">
+                {% csrf_token %}
+                <div class="form-group">
+                  {% if form.quote_id.errors %}
+                  <div class="has-error">
+                    {% endif %}
+                      {% for item in items %}
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                <label for='item_{{item.id}}' class="col-sm-2 control-label">{{item.item}}</label>
+                                <div class='col-md-6'>
+                                  <input type='text' value='0' id='item_{{item.id}}' name='item_{{item.id}}' class="form-control">
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                      {% endfor %}
+                    {% if form.quote_id.errors %}
+                  </div>
+                  {% endif %}
+                </div>
+                <!-- <div class="text-center"> -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2">
+                                <button type="submit" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span> Add items</button>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+                <!-- </div> -->
+
+              </form>
+            </div>
+
+          </div>
+        </div>
+        {% include 'quotations/inlines/quotations_move_date_form.html' %}
+
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+             <h4>Quote list</h4><br>
+             <table class="table">
+              <tr>
+                <th>Item</th>
+                <th>Units</th>
+                <th>Unit price</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+              <tr>
+                <td>Total CBM</td>
+                <td>{{ quote.checklist.total_vol }}</td>
+                <td>{{ quote.checklist.total_cost }}</td>
+
+                <td>
+
+                </td>
+
+                <td></td>
+              </tr>
+              {% for item in quote_items %}
+              <tr>
+                <td>{{ item.item }}</td>
+                <td>{{ item.units }}</td>
+                <td>{{ item.cost }}</td>
+                <td>
+                  <a data-toggle="modal" data-target="#editQuoteItemModal" data-id="{{item.id}}" data-units="{{ item.units }}" data-cost="{{item.cost}}" data-item="{{item.item}}" data-action="edit" href=""><span class="glyphicon glyphicon-pencil"></span></a>
+                </td>
+                <td>
+                  <a data-toggle="modal" data-target="#deleteQuoteItemModal" data-id="{{item.id}}" data-item="{{item.item}}" data-action="delete" href=""><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+       <form class="form-horizontal" method="post" action="{% url 'quotations:params_add' quote.id %}">
+              {% csrf_token %}
+              <div class="form-control-not">
+                <div class="form-group">
+
+                  <label for="vat" class="col-sm-2 control-label">Total cost:</label>
+                  <div class="col-sm-4">
+                    <p class="form-control">{{ quote.total_cost|floatformat:"2"|intcomma }}</p>
+                  </div>
+                </div>
+                </div>
+
+              <div class="form-group">
+                <label for="profit_margin" class="col-sm-2 control-label">Profit margin (%): </label>
+
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" name="profit_margin" id="profit_margin" value="{{ quote.profit_margin}}">
+                </div>
+                  <div class="col-sm-4">
+                    {{ profit_margin_value }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="commission" class="col-sm-2 control-label">Commission (%):</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" name="commission" id="commission" value="{{ quote.commission|floatformat}}">
+                </div>
+                  <div class="col-sm-4">
+                    {{ commission_value }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="vat" class="col-sm-2 control-label">VAT (%):</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" name="vat" id="vat" value="{{ quote.vat|floatformat}}">
+                </div>
+              </div>
+
+              <div class="form-control-not">
+
+                <div class="form-group">
+                  <label for="vat" class="col-sm-2 control-label">Selling price:</label>
+                  <div class="col-sm-4">
+                    <p class="form-control">{{ quote.selling_price|floatformat:"2"|intcomma }}</p>
+                  </div>
+                </div>
+                </div>
+                {% if request.user.is_superuser %}
+                  <div class="form-group">
+                  <label for="discount" class="col-sm-2 control-label">Discount</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" name="discount" id="discount" value="{{ quote.discount|floatformat}}">
+                  </div>
+                </div>
+              {% endif %}
+         <div class="form-control-not">
+
+                <div class="form-group">
+                  <label for="vat" class="col-sm-2 control-label">Charge out price ( {{ move.move_type.currency }} ) :</label>
+                  <div class="col-sm-4">
+                    <p class="form-control">{{ quote.charge_out_price|floatformat:"2"|intcomma }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-ok-sign"></span> Save changes</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+{% include 'quotations/quotations-survey-delete-modal.html' %}
+{% include 'quotations/quotations-survey-edit-modal.html' %}
+{% include 'quotations/quotations-cmb-edit-modal.html' %}
+{% endblock %}
+
+{% block context_scripts %}
+<script src="{% static 'core/components/moment/moment.js' %}" ></script>
+<script src="{% static 'core/components/datepicker/js/bootstrap-datetimepicker.js' %}" ></script>
+<script src="{% static 'core/components/select2/js/select2.min.js' %}" ></script>
+<script src="{% static 'core/scripts/quote.js' %}" ></script>
+{% endblock %}

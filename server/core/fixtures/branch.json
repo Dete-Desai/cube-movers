@@ -1,0 +1,24 @@
+[
+  {
+    "model": "core.branch",
+    "pk": 1,
+    "fields": {
+      "branch_name": "Nairobi"
+    }
+  },
+  {
+    "model": "core.branch",
+
+    "pk": 2,
+    "fields": {
+      "branch_name": "Mombasa"
+    }
+  },
+  {
+    "model": "core.branch",
+    "pk": 3,
+    "fields": {
+      "branch_name": "Kisumu"
+    }
+  }
+]

@@ -1,0 +1,106 @@
+{% extends 'moves/pdf/base.html' %}
+{% load ceil%}
+{% load humanize%}
+
+{% block body %}
+<h3>Re: OFFICE MOVE PROPOSAL</h3>
+
+<p>Thank you for inviting Cube Movers.</p>
+
+<p>
+    Please refer to the premove survey conducted at your offices on {{move.survey.survey_time|date:"dS F Y"}}.
+    We are glad to make this proposal and would be delighted to give your esteemed organization delightful moving experience.
+
+    The estimated volume of the goods is {{move.checklist.total_vol}}cbm and tentative move date is {{move.move_date}}.
+<p>
+
+Services to be offered by Cube Movers are as follows:
+
+
+{% if move.quotedocument.quote_content %}
+	{{move.quotedocument.quote_content|safe}}
+{% else %}
+<h4>Packing</h4>
+
+    <p>We will undertake packing of items as below;</p>
+    <ol>
+
+        <li>Desktop Computers</li>
+            <p>They will be wrapped with white paper, cushioned and packed into carton boxes. Each box will be marked appropriately as advised.</p>
+
+        <li>Files &amp; books</li>
+            <p>They will be packed in cube movers’ plastic crates. The crates will be sealed and labeled indicating the contents, user and department.</p>
+
+        <li>Furniture</li>
+            <p>We will engage a qualified carpenter to dismantle and assemble the furniture. Clean blankets and corrugated paper will be used to pad the furniture thus preventing it from getting scratched.</p>
+        <li>Kitchen Items</li>
+            <p>They will be wrapped with white paper and packed in dish carriers.</p>
+        <li>Personal Items &amp; Work- In –Progress.</li>
+            <p>We will provide each of the staff members with one box to pack their personal items on their own.</p>
+    </ol>
+    <h4>Loading, Transport and Delivery</h4>
+
+    We will transport all the goods using covered/lockable moving truck and deliver to your new premises.
+    <h4>Unpacking &amp; setting up</h4>
+
+    We will provide the service of setting up the Furniture which will be placed to their suitable positions, while unpacking for the files and desktop computers will be done as per your instructions. We will also carry away the moving debris.
+    <h4>Moving Team and Equipment</h4>
+
+    We will provide a team of experienced/trained movers including carpenters and team supervisor.
+    <h4>Exclusions</h4>
+    <ul>
+        <li>Insurance -This quote does not include insurance. We would therefore advice that you take the appropriate insurance cover for your goods given that they are of value. Alternatively we could take it on your behalf at the rate of 1% of the goods value and pass on the charges to you. However our minimum charges are Ksh 10,000.</li>
+        <li>Disconnection and connection of the servers.</li>
+    </ul>
+    <h4>Confirmation</h4>
+        We will need your confirmation two days prior to the Move.
+    <h4>Timing</h4>
+        This move will start at 0800hrs and take approximately 2 days.
+
+{% endif %}
+
+<h4>Charges and Terms</h4>
+<strong>Total Charges:</strong> {{ move.move_type.currency }} {{move.checklist.quotation.charge_out_price|ceil|floatformat:"2"|intcomma}} VAT Inclusive
+<p>Payments should be made in full before the move day, either by banker’s cheque or Mpesa
+    (Pay Bill Number 805800 and kindly note to write your full names when asked for the account number.)
+</p>
+
+<table class="table table-condensed">
+    <tr><td>Company Name</td><td>Cube Movers Limited</td></tr>
+    <tr><td>Acc Name</td><td>Cube Movers Ltd</td></tr>
+    <tr><td>Bank Name</td><td>Co-operative Bank of Kenya</td></tr>
+    <tr><td>Acc No</td><td>01136215289800</td></tr>
+    <tr><td>Swift Code</td><td>KCOOKENA</td></tr>
+</table>
+
+
+<h4>Tasks for Aspire Marketing</h4>
+    <ol>
+        <li>Appoint a Move Coordinator to be in charge of the move on your behalf.</li>
+
+        <li>Make ready for moving all electronic items like desk top computers by disconnecting them from power well in advance.</li>
+
+        <li>Ensure that the office is open and accessible at all times and ensure that all cabinets are also open.</li>
+
+        <li>Inform your staff about the moving and let them know that they will pack their personal items, work-in-progress and any confidential documents in the boxes which we will provide.</li>
+    </ol>
+
+<p>Arrange for secure and appropriate parking space at both locations.</p>
+
+<h4>Kindly Note</h4>
+    <ul>
+        <li>Currency, Cheque books, Bonds, Jewellery, Watches, Ipads, Mobile Phones and the like will not be packed by Cube Movers Ltd.</li>
+        <li>Cancellation fees of 20% will be charged if the move is cancelled on the same day as the planned move date.</li>
+        <li>Overtime charges shall apply for delays caused by yourself such as new house not being ready, not getting clearance from the landlord amongst others.</li>
+        <li>Any damage or loss of items if it occurs must be reported within 7 days after delivery and unpacking.</li>
+        <li>Our staffusually commences work at 0800 hrs, break for lunch between 1300-1400 hrs and break off for the day at 1800 hrs.</li>
+    </ul>
+<h4>Terms and Conditions</h4>
+    <p>All transactions are carried out in accordance with our standard terms and conditions, a copy of which is available upon request.
+
+    We thank you for the opportunity to quote and assure you of our best services throughout the entire move.</p>
+{% endblock %}
+
+</body>
+
+</html>

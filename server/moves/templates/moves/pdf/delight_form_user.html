@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+	<div style="margin: 0 auto; text-align:center;">
+		<div style="padding-top: 10px;padding-bottom: 10px;">
+			{% include 'core/common/email_header.html' %}
+            <h1> <span style="font-size:20px;color:#ffcc14; text-transform:uppercase;">Delight Form</span><br></h1>
+		</div>
+		</div><br>
+		<div style="padding-left:50px">
+
+			<table>
+                <tr>
+                   <td>Arrival at client's place</td>
+                   <td>{{ move.arrival_at_client }}</td>
+                </tr>
+                <tr>
+                   <td>Departure from client's place</td>
+                   <td>{{ move.departure_from_client }}</td>
+                </tr>
+
+                <tr>
+                   <td>Smartness</td>
+                   <td>{{ move.delight.smartness }}</td>
+                </tr>
+				<tr>
+					<th style="text-align: left;">Criteria</th>
+					<th style="text-align: left;">Score</th>
+				</tr>
+				 <tr>
+					<td>Smartness</td>
+				    <td>{{ move.delight.smartness }}</td>
+				 </tr>
+
+                <tr>
+					<td>Time</td>
+				    <td>{{ move.delight.time }}</td>
+				 </tr>
+
+                <tr>
+					<td>Courtesy</td>
+				    <td>{{ move.delight.courtesy }}</td>
+				 </tr>
+
+                <tr>
+					<td>Creativity</td>
+				    <td>{{ move.delight.creativity }}</td>
+				 </tr>
+
+                <tr>
+					<td>Explanation</td>
+				    <td>{{ move.delight.explanation }}</td>
+				 </tr>
+
+                <tr>
+					<td>Willingness</td>
+				    <td>{{ move.delight.willingness }}</td>
+				 </tr>
+
+                <tr>
+					<td>Team Leader Competence</td>
+				    <td>{{ move.delight.leader_competence }}</td>
+				 </tr>
+
+                <tr>
+					<td>Moving Team Competence</td>
+				    <td>{{ move.delight.team_competence }}</td>
+				 </tr>
+
+                <tr>
+					<td>Care and Attention</td>
+				    <td>{{ move.delight.care_attention }}</td>
+				 </tr>
+
+                <tr>
+					<td>Overall Satisfaction</td>
+				    <td>{{ move.delight.satisfaction }}</td>
+				 </tr>
+
+			</table>
+          {% if move.delight.comments %}<p> Comments <br> {{move.delight.comments}} </p>{% endif %}
+		</div>
+</body>
+</html>

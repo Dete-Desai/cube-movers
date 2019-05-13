@@ -1,0 +1,51 @@
+[
+  {
+    "model": "core.movetypedetails",
+    "pk": 1,
+    "fields": {
+      "name": "Inter-County (within Kenya)"
+    }
+  },
+  {
+    "model": "core.movetypedetails",
+    "pk": 2,
+    "fields": {
+      "name": "International Move"
+    }
+  },
+  {
+    "model": "core.movetypedetails",
+    "pk": 3,
+    "fields": {
+      "name": "Cross border (Within East Africa Region)"
+    }
+},
+{
+  "model": "core.movetypedetails",
+  "pk": 4,
+  "fields": {
+    "name": "Packing and Crafting"
+  }
+},
+{
+  "model": "core.movetypedetails",
+  "pk": 5,
+  "fields": {
+    "name": "Machinery Moving"
+  }
+},
+{
+  "model": "core.movetypedetails",
+  "pk": 6,
+  "fields": {
+    "name": "Pets Relocation"
+  }
+},
+{
+  "model": "core.movetypedetails",
+  "pk": 7,
+  "fields": {
+    "name": "Gifts Handling"
+  }
+}
+]

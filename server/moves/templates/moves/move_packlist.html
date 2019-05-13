@@ -1,0 +1,96 @@
+
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% block title %}Moves - Cube Movers{% endblock %}
+  {% block label_block %}
+  <ol class="breadcrumb">
+  <li><a href="{% url 'inquiry:view' move.id %}">
+  <span class="glyphicon glyphicon-list-alt"></span>
+  Move record</a></li>
+  <li class="active">
+  <span class="glyphicon glyphicon-th-list"></span>
+  Packlist</li>
+</ol>
+  {% endblock %}
+  {% block content %}
+
+  <div class="container">
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active">
+        <div class="col-md-10"><br>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> {{ move.customer.full_name }}</h3>
+            </div>
+            <div class="panel-body">
+
+            {% include 'moves/packlist_details_tabs.html' with packlist='active' move_obj=move %}
+
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              <p><span class="glyphicon glyphicon-eye-open"></span> View instructions <span class="caret"></span></p>
+            </a>
+
+            <div class="collapse" id="collapseExample">
+              <div class="panel panel-default">
+                  <div class="panel-body">
+                    <p><b>Special instructions</b></p>
+                    <p>{{move.special_instructions}}</p>
+                   <hr>
+                     <p><b>Accesibility instructions</b></p>
+                    <p>{{move.accessibility_instructions}}</p>
+                  </div>
+                </div>
+              </div>
+              <form method="post" action="{% url 'moves:packlist' move_id=move.id  checklist_id=move.checklist.id %}">
+                {% csrf_token %}
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                   <h5><span class="glyphicon glyphicon-list-alt"></span><b> Packing list</b></h5>
+                   <table class="table">
+                    <tr>
+                      <th>Package No </th>
+                      <th>Item </th>
+                      <th>Room </th>
+                      <th>Volume (CBM)</th>
+                      <th>Quantity</th>
+                      <th>Packed</th>
+                      <th>Box No</th>
+                    </tr>
+                     {% for item in items %}
+                    <tr>
+                      <td>{{ item.id }}</td>
+                      <td>{% if item.item %}{{ item.item }}{% else %}{{item.item_backup}}{% endif %} </td>
+                      <td>{{ item.room.name }}</td>
+
+                      <td>{{ item.vol }}</td>
+                      <td>{{ item.qty }}</td>
+
+                      {% if item.is_packed %}
+                      <td><input checked type="checkbox" name="items" value="{{ item.id }}"></td>
+                      {% else %}
+                      <td><input type="checkbox" name="items" value="{{ item.id }}"></td>
+                      {% endif %}
+                      <td><input type="text" class="form-control" id='item_{{item.id}}' name='item_{{item.id}}' {% if item.box_ref %}value="{{item.box_ref}}"{% endif %}></td>
+                    </tr>
+                     {% endfor %}
+                  </table>
+                 <button type="submit" class="btn btn-primary btn-block">Save list</button>
+                </div>
+              </div>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endblock %}
+
+    {% block context_scripts %}
+    <script src="{% static 'core/components/datatables/js/jquery.dataTables.min.js' %}" ></script>
+    <script src="{% static 'core/components/datatablesview/datatableview.js' %}" ></script>
+    {% endblock %}

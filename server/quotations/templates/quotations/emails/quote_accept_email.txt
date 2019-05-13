@@ -1,0 +1,5 @@
+A quote for the client: {{move.customer.full_name}} has been accepted.
+Click <a href="http://{{host}}{% url 'inquiry:view' move.id%}">here</a> to view the details
+
+
+{% include 'core/common/email_disclamer.txt' %}

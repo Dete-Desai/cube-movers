@@ -1,0 +1,78 @@
+{% extends 'core/base.html' %}
+{% load staticfiles %}
+{% block context_styles %}
+<link href="{% static 'core/components/datepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+<link href="{% static 'core/components/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+<link href="{% static 'core/components/select2/css/select2.min.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body_block %}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3 col-md-2 sidebar">
+			<ul class="nav nav-sidebar">
+				{% block side_block %}
+					{% include 'core/common/sidebar.html' %}
+				{% endblock %}
+			</ul>
+		</div>
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="page-header">
+				<div class="visible-xs">
+					<a class="btn btn-primary btn-md" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+					<span class="glyphicon glyphicon-align-justify"></span> Side navigation
+					</a><br><br>
+					<div class="collapse" id="collapseExample">
+						<div class="list-group">
+						  <a class="list-group-item" href="{% url 'dashboard:dashboard' %}"> Overview</a>
+						  <a class="list-group-item" href="{% url 'inquiry:list' %}"> Inquiries</a>
+						  <a class="list-group-item" href="{% url 'surveys:presurvey_list' %}"> Pre-surveys</a>
+						  <a class="list-group-item" href="{% url 'surveys:list' %}"> Surveys</a>
+						  <a class="list-group-item" href="{% url 'quotations:list' %}"> Quotes</a>
+						  <a class="list-group-item" href="{% url 'quotations:rejected_list' %}"> Rejected Quotes</a>
+						  <a class="list-group-item" href="{% url 'invoices:list' %}"> Invoices</a>
+						  <a class="list-group-item" href="{% url 'moves:premoves_list' %}"> Pre-moves</a>
+						  <a class="list-group-item" href="{% url 'moves:list' %}"> Moves</a>
+						  <a class="list-group-item" href="{% url 'moves:cancelled_list' %}"> Cancelled Moves</a>
+						  <a class="list-group-item" href="{% url 'moves:postmoves_list' %}"> Post-moves</a>
+						  <a class="list-group-item" href="{% url 'moves:complete_list' %}"> Complete move</a>
+						</div>
+					</div>
+				</div>
+
+				<h4 class="pull-left">{% block label_block %}<span class="glyphicon glyphicon-dashboard"></span>  Dashboard {% endblock %}</h4>
+				<div class="pull-right">
+					<!-- displays success -->
+					{% if messages %}
+					{% for message in messages%}
+					{% if message.tags == 'info' %}
+					<div class="alert alert-success alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<strong>{{message}}</strong>
+					</div>
+					{% endif %}
+					{% endfor %}
+					{% endif %}
+
+					<!-- displays error -->
+					{% if messages %}
+					{% for message in messages%}
+					{% if message.tags == 'error' %}
+					<div class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<strong>{{message}}</strong>
+					</div>
+					{% endif %}
+					{% endfor %}
+					{% endif %}
+				</div>
+
+				<span class="clearfix"></span>
+			</div>
+			{% block content %}{% endblock %}
+
+		</div>
+
+	</div>
+</div>
+{% endblock %}

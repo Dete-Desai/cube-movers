@@ -1,0 +1,4 @@
+Kindly user a mail client that support HTML file format to get the quote
+
+
+{% include 'core/common/email_disclamer.txt' %}

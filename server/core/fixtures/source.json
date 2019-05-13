@@ -1,0 +1,16 @@
+[
+  {
+    "model": "core.source",
+    "pk": 1,
+    "fields": {
+      "name": "Phone"
+    }
+  },
+  {
+    "model": "core.source",
+    "pk": 2,
+    "fields": {
+      "name": "Email"
+    }
+  }
+]

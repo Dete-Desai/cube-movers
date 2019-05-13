@@ -1,0 +1,12 @@
+{% if move.move_status.name == "post-move" or move.move_status.name == "complete" %}
+    <div class="page-header">
+      <a role="button" data-toggle="collapse" href="#post-move-details" aria-expanded="false" aria-controls="pre-move-details">
+        <span class="glyphicon glyphicon-heart"></span> Post move details<span class="caret"></span>
+      </a>
+    </div>
+    <div class="collapse" id="post-move-details">
+      <a href="{% url 'moves:delight' move.id %}" type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-heart"></span>
+      View delight form</a>
+    </div>
+    {% endif %}

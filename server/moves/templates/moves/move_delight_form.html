@@ -1,0 +1,385 @@
+
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% block title %}Moves - Cube Movers{% endblock %}
+{% block label_block %}
+  <ol class="breadcrumb">
+  <li><a href="{% url 'inquiry:view' move.id %}">
+  <span class="glyphicon glyphicon-list-alt"></span>
+  Move record</a></li>
+  <li class="active">
+  <span class="glyphicon glyphicon-heart"></span>
+  Delight form</li>
+</ol>
+{% endblock %}
+  {% block content %}
+
+  <div class="container">
+  <form method="post" action="{% url 'moves:delight' move.id %}">
+       {% csrf_token %}
+        <div class="col-md-10"><br>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{ move.customer.full_name }}</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="form-group">
+                   {% if form.arrival_at_client.errors %}
+                   <div class="has-error">
+                     {% endif %}
+                     <label class="control-label">Arrival at client's place</label>
+                     <div class="input-group">
+                       <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+                       <input name="arrival_at_client" value="{{move.arrival_at_client|date:'%m/%d/%Y %I:%M %p'}}" type='text' class="form-control" id='arr-at-client' />
+                     </div>
+                     {% if form.arrival_at_client.errors %}
+                        <p>{{form.arrival_at_client.errors}}</p>
+
+                   </div>
+                   {% endif %}
+                 </div>
+                <div class="form-group">
+                   {% if form.departure_from_client.errors %}
+                   <div class="has-error">
+                     {% endif %}
+                     <label class="control-label">Departure from client's place</label>
+                     <div class="input-group">
+                       <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+                       <input name="departure_from_client" value="{{move.departure_from_client|date:'%m/%d/%Y %I:%M %p'}}" type='text' class="form-control" id='dep-at-client' />
+                     </div>
+                     {% if form.departure_from_client.errors %}
+                     <p>{{form.departure_from_client.errors}}</p>
+                   </div>
+                   {% endif %}
+                 </div>
+                      <table class="table">
+          <thead>
+            <th></th>
+            <th>Excellent</th>
+            <th>Good</th>
+            <th>Average</th>
+            <th>Unsatisfacory</th>
+            <th>Poor</th>
+        </thead>
+          <tr>
+            <td></td>
+            <td>10&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;9</td>
+            <td>8&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;7</td>
+            <td>6&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;5</td>
+            <td>4&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;3</td>
+            <td>2&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;1</td>
+          </tr>
+          <tr>
+            <td>1. Smartness & appearance of our staff and vehicles</td>
+            <td>
+              <input type="radio" name="smartness"  {% if move.delight.smartness == 10 %} checked {% endif %} value="10" required>
+              &thinsp;&thinsp;&thinsp;&thinsp;&thinsp;
+              <input type="radio" name="smartness"  {% if move.delight.smartness == 9 %} checked {% endif %} value="9" required>
+            </td>
+            <td>
+              <input type="radio" name="smartness"  {% if move.delight.smartness == 8 %} checked {% endif %} value="8" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="smartness"  {% if move.delight.smartness == 7 %} checked {% endif %} value="7" required>
+            </td>
+            <td>
+              <input type="radio" name="smartness"  {% if move.delight.smartness == 6 %} checked {% endif %} value="6" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="smartness"  {% if move.delight.smartness == 5 %} checked {% endif %} value="5" required>
+            </td>
+            <td>
+              <input type="radio" name="smartness"  {% if move.delight.smartness == 4 %} checked {% endif %} value="4" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="smartness"  {% if move.delight.smartness == 3 %} checked {% endif %} value="3" required>
+            </td>
+            <td>
+              <input type="radio" name="smartness"  {% if move.delight.smartness == 2 %} checked {% endif %} value="2" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="smartness"  {% if move.delight.smartness == 1 %} checked {% endif %} value="1" required>
+            </td>
+          </tr>
+          <tr>
+            <td>2. Our timeliness</td>
+            <td>
+              <input type="radio" name="time" {% if move.delight.time == 10 %} checked {% endif %}  value="10" required>
+              &thinsp;&thinsp;&thinsp;&thinsp;&thinsp;
+              <input type="radio" name="time"  {% if move.delight.time == 9 %} checked {% endif %} value="9" required>
+            </td>
+            <td>
+              <input type="radio" name="time"  {% if move.delight.time == 8 %} checked {% endif %} value="8" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="time"  {% if move.delight.time == 7 %} checked {% endif %} value="7" required>
+            </td>
+            <td>
+              <input type="radio" name="time"  {% if move.delight.time == 6 %} checked {% endif %} value="6" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="time"  {% if move.delight.time == 5 %} checked {% endif %} value="5" required>
+            </td>
+            <td>
+              <input type="radio" name="time"  {% if move.delight.time == 4 %} checked {% endif %} value="4" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="time"  {% if move.delight.time == 3 %} checked {% endif %} value="3" required>
+            </td>
+            <td>
+              <input type="radio" name="time"  {% if move.delight.time == 2 %} checked {% endif %} value="2" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="time"  {% if move.delight.time == 1 %} checked {% endif %} value="1" required>
+            </td>
+          </tr>
+          <tr>
+            <td>3. Our courtesy</td>
+            <td>
+              <input type="radio" name="courtesy"  {% if move.delight.courtesy == 10 %} checked {% endif %} value="10" required>
+              &thinsp;&thinsp;&thinsp;&thinsp;&thinsp;
+              <input type="radio" name="courtesy"  {% if move.delight.courtesy == 9 %} checked {% endif %} value="9" required>
+            </td>
+            <td>
+              <input type="radio" name="courtesy"  {% if move.delight.courtesy == 8 %} checked {% endif %} value="8" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="courtesy"  {% if move.delight.courtesy == 7 %} checked {% endif %} value="7" required>
+            </td>
+            <td>
+              <input type="radio" name="courtesy"  {% if move.delight.courtesy == 6 %} checked {% endif %} value="6" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="courtesy"  {% if move.delight.courtesy == 5 %} checked {% endif %} value="5" required>
+            </td>
+            <td>
+              <input type="radio" name="courtesy"  {% if move.delight.courtesy == 4 %} checked {% endif %} value="4" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="courtesy"  {% if move.delight.courtesy == 3 %} checked {% endif %} value="3" required>
+            </td>
+            <td>
+              <input type="radio" name="courtesy"  {% if move.delight.courtesy == 2 %} checked {% endif %} value="2" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="courtesy"  {% if move.delight.courtesy == 1 %} checked {% endif %} value="1" required>
+            </td>
+          </tr>
+          <tr>
+            <td>4. Our creativity and problem solving ability</td>
+            <td>
+              <input type="radio" name="creativity" {% if move.delight.creativity == 10 %} checked {% endif %} value="10" required>
+              &thinsp;&thinsp;&thinsp;&thinsp;&thinsp;
+              <input type="radio" name="creativity"  {% if move.delight.creativity == 9 %} checked {% endif %} value="9" required>
+            </td>
+            <td>
+              <input type="radio" name="creativity"  {% if move.delight.creativity == 8 %} checked {% endif %} value="8" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="creativity"  {% if move.delight.creativity == 7 %} checked {% endif %} value="7" required>
+            </td>
+            <td>
+              <input type="radio" name="creativity"  {% if move.delight.creativity == 6 %} checked {% endif %} value="6" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="creativity"  {% if move.delight.creativity == 5 %} checked {% endif %} value="5" required>
+            </td>
+            <td>
+              <input type="radio" name="creativity"  {% if move.delight.creativity == 4 %} checked {% endif %} value="4" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="creativity"  {% if move.delight.creativity == 3 %} checked {% endif %} value="3" required>
+            </td>
+            <td>
+              <input type="radio" name="creativity"  {% if move.delight.creativity == 2 %} checked {% endif %} value="2" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="creativity"  {% if move.delight.creativity == 1 %} checked {% endif %} value="1" required>
+            </td>
+          </tr>
+          <tr>
+            <td>5. Explanation by Sale executive before the move</td>
+            <td>
+              <input type="radio" name="explanation" {% if move.delight.explanation == 10 %} checked {% endif %} value="10" required>
+              &thinsp;&thinsp;&thinsp;&thinsp;&thinsp;
+              <input type="radio" name="explanation"  {% if move.delight.explanation == 9 %} checked {% endif %} value="9" required>
+            </td>
+            <td>
+              <input type="radio" name="explanation"  {% if move.delight.explanation == 8 %} checked {% endif %} value="8" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="explanation"  {% if move.delight.explanation == 7 %} checked {% endif %} value="7" required>
+            </td>
+            <td>
+              <input type="radio" name="explanation" {% if move.delight.explanation == 6 %} checked {% endif %} value="6" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="explanation"  {% if move.delight.explanation == 5 %} checked {% endif %} value="5" required>
+            </td>
+            <td>
+              <input type="radio" name="explanation"  {% if move.delight.explanation == 4 %} checked {% endif %} value="4" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="explanation"  {% if move.delight.explanation == 3 %} checked {% endif %} value="3" required>
+            </td>
+            <td>
+              <input type="radio" name="explanation"  {% if move.delight.explanation == 2 %} checked {% endif %} value="2" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="explanation"  {% if move.delight.explanation == 1 %} checked {% endif %} value="1" required>
+            </td>
+          </tr>
+          <tr>
+            <td>6. Our sales executives willingness to help</td>
+            <td>
+              <input type="radio" name="willingness" {% if move.delight.willingness == 10 %} checked {% endif %} value="10" required>
+              &thinsp;&thinsp;&thinsp;&thinsp;&thinsp;
+              <input type="radio" name="willingness"  {% if move.delight.willingness == 9 %} checked {% endif %} value="9" required>
+            </td>
+            <td>
+              <input type="radio" name="willingness" {% if move.delight.willingness == 8 %} checked {% endif %} value="8" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="willingness" {% if move.delight.willingness == 7 %} checked {% endif %} value="7" required>
+            </td>
+            <td>
+              <input type="radio" name="willingness" {% if move.delight.willingness == 6 %} checked {% endif %} value="6" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="willingness" {% if move.delight.willingness == 5 %} checked {% endif %} value="5" required>
+            </td>
+            <td>
+              <input type="radio" name="willingness" {% if move.delight.willingness == 4 %} checked {% endif %} value="4" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="willingness" {% if move.delight.willingness == 3 %} checked {% endif %} value="3" required>
+            </td>
+            <td>
+              <input type="radio" name="willingness" {% if move.delight.willingness == 2 %} checked {% endif %} value="2" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="willingness" {% if move.delight.willingness == 1 %} checked {% endif %} value="1" required>
+            </td>
+          </tr>
+          <tr>
+            <td>7. Competence of the team leader</td>
+            <td>
+              <input type="radio" name="leader_competence" {% if move.delight.leader_competence == 10 %} checked {% endif %} value="10" required>
+              &thinsp;&thinsp;&thinsp;&thinsp;&thinsp;
+              <input type="radio" name="leader_competence"  {% if move.delight.leader_competence == 9 %} checked {% endif %} value="9" required>
+            </td>
+            <td>
+              <input type="radio" name="leader_competence"  {% if move.delight.leader_competence == 8 %} checked {% endif %} value="8" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="leader_competence" {% if move.delight.leader_competence == 7 %} checked {% endif %} value="7" required>
+            </td>
+            <td>
+              <input type="radio" name="leader_competence" {% if move.delight.leader_competence == 6 %} checked {% endif %} value="6" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="leader_competence" {% if move.delight.leader_competence == 5 %} checked {% endif %} value="5" required>
+            </td>
+            <td>
+              <input type="radio" name="leader_competence" {% if move.delight.leader_competence == 4 %} checked {% endif %} value="4" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="leader_competence" {% if move.delight.leader_competence == 3 %} checked {% endif %} value="3" required>
+            </td>
+            <td>
+              <input type="radio" name="leader_competence" {% if move.delight.leader_competence == 2 %} checked {% endif %} value="2" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="leader_competence"  {% if move.delight.leader_competence == 1 %} checked {% endif %} value="1" required>
+            </td>
+          </tr>
+          <tr>
+            <td>8. Competence of our moving team as a whole</td>
+            <td>
+              <input type="radio" name="team_competence" {% if move.delight.team_competence == 10 %} checked {% endif %} value="10" required>
+              &thinsp;&thinsp;&thinsp;&thinsp;&thinsp;
+              <input type="radio" name="team_competence" {% if move.delight.team_competence == 9 %} checked {% endif %} value="9" required>
+            </td>
+            <td>
+              <input type="radio" name="team_competence" {% if move.delight.team_competence == 8 %} checked {% endif %} value="8" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="team_competence" {% if move.delight.team_competence == 7 %} checked {% endif %} value="7" required>
+            </td>
+            <td>
+              <input type="radio" name="team_competence" {% if move.delight.team_competence == 6 %} checked {% endif %} value="6" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="team_competence" {% if move.delight.team_competence == 5 %} checked {% endif %} value="5" required>
+            </td>
+            <td>
+              <input type="radio" name="team_competence" {% if move.delight.team_competence == 4 %} checked {% endif %} value="4" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="team_competence" {% if move.delight.team_competence == 3 %} checked {% endif %} value="3" required>
+            </td>
+            <td>
+              <input type="radio" name="team_competence" {% if move.delight.team_competence == 2 %} checked {% endif %} value="2" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="team_competence" {% if move.delight.team_competence == 1 %} checked {% endif %} value="1" required>
+            </td>
+          </tr>
+          <tr>
+            <td>9. Care and attention given during the move</td>
+            <td>
+              <input type="radio" name="care_attention" {% if move.delight.care_attention == 10 %} checked {% endif %} value="10" required>
+              &thinsp;&thinsp;&thinsp;&thinsp;&thinsp;
+              <input type="radio" name="care_attention" {% if move.delight.care_attention == 9 %} checked {% endif %} value="9" required>
+            </td>
+            <td>
+              <input type="radio" name="care_attention" {% if move.delight.care_attention == 8 %} checked {% endif %} value="8" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="care_attention" {% if move.delight.care_attention == 7 %} checked {% endif %} value="7" required>
+            </td>
+            <td>
+              <input type="radio" name="care_attention"  {% if move.delight.care_attention == 6 %} checked {% endif %} value="6" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="care_attention"  {% if move.delight.care_attention == 5 %} checked {% endif %} value="5" required>
+            </td>
+            <td>
+              <input type="radio" name="care_attention"  {% if move.delight.care_attention == 4 %} checked {% endif %} value="4" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="care_attention"  {% if move.delight.care_attention == 3 %} checked {% endif %} value="3" required>
+            </td>
+            <td>
+              <input type="radio" name="care_attention"  {% if move.delight.care_attention == 2 %} checked {% endif %} value="2" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="care_attention"  {% if move.delight.care_attention == 1 %} checked {% endif %} value="1" required>
+            </td>
+          </tr>
+          <tr>
+            <td>10. Your overall satisfaction with the move</td>
+            <td>
+              <input type="radio" name="satisfaction"  {% if move.delight.satisfaction == 10 %} checked {% endif %} value="10" required>
+              &thinsp;&thinsp;&thinsp;&thinsp;&thinsp;
+              <input type="radio" name="satisfaction"  {% if move.delight.satisfaction == 9 %} checked {% endif %} value="9" required>
+            </td>
+            <td>
+              <input type="radio" name="satisfaction"  {% if move.delight.satisfaction == 8 %} checked {% endif %}value="8" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="satisfaction"  {% if move.delight.satisfaction == 7 %} checked {% endif %} value="7" required>
+            </td>
+            <td>
+              <input type="radio" name="satisfaction"  {% if move.delight.satisfaction == 6 %} checked {% endif %} value="6" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="satisfaction"  {% if move.delight.satisfaction == 5 %} checked {% endif %} value="5" required>
+            </td>
+            <td>
+              <input type="radio" name="satisfaction"  {% if move.delight.satisfaction == 4 %} checked {% endif %} value="4" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="satisfaction"  {% if move.delight.satisfaction == 3 %} checked {% endif %} value="3" required>
+            </td>
+            <td>
+              <input type="radio" name="satisfaction"  {% if move.delight.satisfaction == 2 %} checked {% endif %} value="2" required>
+              &thinsp;&thinsp;&thinsp;
+              <input type="radio" name="satisfaction"  {% if move.delight.satisfaction == 1 %} checked {% endif %} value="1" required>
+            </td>
+          </tr>
+        </table>
+        <div class="form-group">
+          <label for="exampleInputName2">More comments</label>
+          <textarea name="comments" class="form-control" rows="3">{% if move.delight.comments %} {{move.delight.comments}} {% endif %}</textarea>
+        </div>
+
+        <div class="form-group">
+        {% if form.token.errors %}
+          <div class="has-error">
+
+        {% endif %}
+          <label for="exampleInputName2"><span class="glyphicon glyphicon-lock"></span> Client token</label>
+           <input name="token" type="password" class="form-control" id="" placeholder="Password">
+        {% if form.token.errors %}
+            <p>{{form.token.errors}}</p>
+          </div>
+        {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save changes</button>
+        </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+
+    {% block context_scripts %}
+    <script src="{% static 'core/components/moment/moment.js' %}" ></script>
+    <script src="{% static 'core/components/datepicker/js/bootstrap-datetimepicker.js' %}" ></script>
+    <script src="{% static 'core/scripts/move_further_details.js' %}" ></script>
+    <script src="{% static 'core/components/datatables/js/jquery.dataTables.min.js' %}" ></script>
+    <script src="{% static 'core/components/datatablesview/datatableview.js' %}" ></script>
+    {% endblock %}

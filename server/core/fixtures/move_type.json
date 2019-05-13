@@ -1,0 +1,62 @@
+[
+  {
+    "model": "core.movetype",
+    "pk": 3,
+    "fields": {
+      "name": "House Move",
+      "currency": "KES"
+    }
+  },
+  {
+    "model": "core.movetype",
+    "pk": 4,
+    "fields": {
+      "name": "Office Move",
+      "currency": "KES"
+    }
+  },
+  {
+    "model": "core.movetype",
+    "pk": 5,
+    "fields": {
+      "name": "Storage and Warehousing",
+      "currency": "KES"
+    }
+  },
+  {
+    "model": "core.movetype",
+    "pk": 6,
+    "fields": {
+      "name": "Packing and Crafting",
+      "currency": "KES",
+      "is_active": false
+    }
+  },
+  {
+    "model": "core.movetype",
+    "pk": 7,
+    "fields": {
+      "name": "Machinery Moving",
+      "currency": "KES",
+      "is_active": false
+    }
+  },
+  {
+    "model": "core.movetype",
+    "pk": 8,
+    "fields": {
+      "name": "Pets Relocation",
+      "currency": "KES",
+      "is_active": false
+    }
+  },
+  {
+    "model": "core.movetype",
+    "pk": 10,
+    "fields": {
+      "name": "Gifts Handling",
+      "currency": "KES",
+      "is_active": false
+    }
+  }
+]

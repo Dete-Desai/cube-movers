@@ -1,0 +1,23 @@
+[
+  {
+    "model": "core.quoteitemtype",
+    "pk": 1,
+    "fields": {
+      "name": "material"
+    }
+  },
+  {
+    "model": "core.quoteitemtype",
+    "pk": 2,
+    "fields": {
+      "name": "labour"
+    }
+  },
+  {
+    "model": "core.quoteitemtype",
+    "pk": 3,
+    "fields": {
+      "name": "other"
+    }
+  }
+]

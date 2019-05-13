@@ -1,0 +1,51 @@
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+
+{% block title %}Edit Quote - Cube Movers{% endblock %}
+{% block label_block %}
+  <ol class="breadcrumb">
+  <li><a href="{% url 'inquiry:view' move.id %}">
+  <span class="glyphicon glyphicon-list-alt"></span>
+  Move record</a></li>
+  <li class="active">Edit Quote</li>
+</ol>
+{% endblock %}
+{% block content %}
+
+  <div class="container">
+    <div class="col-md-10">
+
+      <form method="post" action="{% url 'quotations:edit' move.id %}">
+        {% csrf_token %}
+        {{form.move.as_hidden}}
+        <div class = "form-group">
+            {% if form.quote_content.errors %}
+              <p class = "danger">
+                <span class = "label label-danger">
+                  <i class = "fa fa-warning"></i>
+                    Error
+                </span>
+                {% for error in form.quote_content.errors %}
+                  {{ error }}
+                {% endfor %}
+              </p>
+            {% endif %}
+            <label for='{{ form.quote_content.id_for_label }}'>{{form.quote_content.label}}</label>
+            {{ form.quote_content }}
+            </div>
+        <div class="form-group">
+
+            <button class="btn btn-primary btn-md" type="submit" href="#" role="button">Save Quote</button>
+
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+
+{% endblock %}
+{% block context_scripts %}
+{{block.super}}
+{{ form.media }}
+{% endblock %}

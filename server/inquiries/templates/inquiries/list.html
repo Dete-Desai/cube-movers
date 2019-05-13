@@ -1,0 +1,35 @@
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% block title %}Inquiries - Cube Movers{% endblock %}
+{% block label_block %}<span class="glyphicon glyphicon-question-sign"></span> Inquiries {% endblock %}
+{% block content %}
+
+<div class="container">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="{% url 'inquiry:list' %}"><span class="glyphicon glyphicon-list-alt"></span> Inquiries</a></li>
+    <li ><a href="{% url 'customers:create' %}"><span class="glyphicon glyphicon-copy"></span> Create Inquiry</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active">
+      <div class="col-md-10"><br>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span><strong> Customer Inquiries </strong></h3>
+          </div>
+          <div class="panel-body">
+
+            {{ datatable }}
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane"></div>
+  </div>
+</div>
+
+{% endblock %}
+

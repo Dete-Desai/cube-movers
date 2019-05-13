@@ -1,0 +1,59 @@
+{% load group_check %}
+
+<li {% if overview_show %} class="active"{% endif %}>
+    <a href="{% url 'dashboard:dashboard' %}"><span class="glyphicon glyphicon-dashboard"></span>
+     Overview</a>
+</li>
+{% if request.user|group_check:"customer_care" %}
+
+<li {% if inquiry_show %} class="active"{% endif %}>
+    <a href="{% url 'inquiry:list' %}"><span class="glyphicon glyphicon-question-sign"></span> Inquries</a>
+</li>
+{% endif %}
+
+{% if request.user|group_check:"customer_care" %}
+    <li {% if presurvey_show %} class="active"{% endif %}>
+    <a href="{% url 'surveys:presurvey_list' %}"><span class="glyphicon glyphicon-eye-close"></span> Pre-surveys</a>
+    </li>
+{% endif %}
+
+{% if request.user|group_check:"customer_care, move_reps" %}
+    <li {% if survey_show %} class="active"{% endif %}><a href="{% url 'surveys:list' %}"><span class="glyphicon glyphicon-eye-open"></span> Surveys</a>
+    </li>
+{% endif %}
+
+{% if request.user|group_check:"customer_care, move_reps" %}
+    <li {% if quote_show %} class="active"{% endif %}><a href="{% url 'quotations:list' %}"><span class="glyphicon glyphicon-tag"></span> Quotes</a>
+    </li>
+{% endif %}
+
+{% if request.user|group_check:"customer_care, move_reps" %}
+    <li {% if rejected_quote_show %} class="active"{% endif %}><a href="{% url 'quotations:rejected_list' %}"><span class="glyphicon glyphicon-remove-circle"></span> Rejected Quotes</a>
+    </li>
+{% endif %}
+
+{% if request.user|group_check:"manager, accountant" %}
+    <li {% if invoice_show %} class="active"{% endif %}><a href="{% url 'invoices:list' %}"><span class="glyphicon glyphicon-usd"></span> Invoices</a>
+    </li>
+{% endif %}
+
+{% if request.user|group_check:"move_manager" %}
+    <li {% if premove_show %} class="active"{% endif %}><a href="{% url 'moves:premoves_list' %}"><span class="glyphicon glyphicon-briefcase"></span> Pre-moves</a>
+    </li>
+{% endif %}
+{% if request.user|group_check:"move_manager, move_supervisor" %}
+    <li {% if move_list_show %} class="active"{% endif %}><a href="{% url 'moves:list' %}"><span class="glyphicon glyphicon-transfer"></span> Moves</a>
+    </li>
+{% endif %}
+{% if request.user|group_check:"move_manager, move_supervisor, quality_assuarance, customer_care, move_reps" %}
+    <li {% if move_cancelled_show %} class="active"{% endif %}><a href="{% url 'moves:cancelled_list' %}"><span class="glyphicon glyphicon-remove-circle"></span> Cancelled Moves</a>
+    </li>
+{% endif %}
+{% if request.user|group_check:"move_manager, move_supervisor, quality_assuarance" %}
+    <li {% if postmove_show %} class="active"{% endif %}><a href="{% url 'moves:postmoves_list' %}"><span class="glyphicon glyphicon-heart"></span> Post moves</a>
+    </li>
+{% endif %}
+{% if request.user|group_check:"move_manager, move_supervisor, quality_assuarance" %}
+    <li {% if complete_show %} class="active"{% endif %}><a href="{% url 'moves:complete_list' %}"><span class="glyphicon glyphicon-ok"></span> Complete moves</a>
+    </li>
+{% endif %}

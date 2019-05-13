@@ -1,0 +1,18 @@
+Thank you
+
+Dear {{move.customer.full_name}},
+
+Dear {{move.customer.full_name}},
+Thank you for using our services during your recent relocation exercise. It’s our hope that you were happy with the way the move was executed.
+
+We appreciate your business and we hope to be of service to you in the near future.
+
+On behalf of Cube Movers, we wish you peace and serenity in your new environment.
+
+Attached is a copy of the delight form you completed.
+
+Sincerely,
+Cube Movers Service Team
+
+
+{% include 'core/common/email_disclamer.txt' %}

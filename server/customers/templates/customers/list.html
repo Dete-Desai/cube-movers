@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+{% load staticfiles %}
+{% block context_styles %}
+
+{% endblock %}
+{% block body_block %}
+
+<div class="container">
+  <div class="page-header">
+    <h4 class="pull-left"><span class="glyphicon glyphicon-user"></span> Customers</h4>
+    {% include 'core/common/notifications.html' %}
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="pull-left">
+       <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> All customers</h3>
+     </div>
+     <!--<div class="pull-right">-->
+       <!--<h3 class="panel-title"><a href="" data-toggle="modal" data-target="#createCustomerModal"><span class="glyphicon glyphicon-plus"></span> Add new customer</a> </h3>-->
+     <!--</div>-->
+     <div class="clearfix"></div>
+   </div>
+   <div class="panel-body">
+    {{ datatable }}
+  </div>
+</div>
+</div> <!--ends container -->
+
+<!-- Modal -->
+<div class="modal fade" id="createCustomerModal" tabindex="-1" role="dialog" aria-labelledby="createCustomerLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form method="post" action="{% url 'customers:update' customer.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="page" value="customer_detail">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span> New customer</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="full_name">Full name</label>
+            <input type="text" name="full_name" class="form-control" id="full_name" placeholder="John Doe" value="">
+          </div>
+          <div class="form-group">
+            <label for="secondary_name">Secondary name</label>
+            <input type="text" name="secondary_name" class="form-control" id="secondary_name" placeholder="e.g Jane Doe" value="">
+          </div>
+          <div class="form-group">
+            <label for="phone_number">Phone number</label>
+            <input type="text" name="phone_number" class="form-control" id="phone_number" placeholder="07XX-XXX-XXX" value="">
+          </div>
+          <div class="form-group">
+            <label for="secondary_phone_number">Secondary phone number</label>
+            <input type="text" name="secondary_phone_number" class="form-control" id="secondary_phone_number" placeholder="07XX-XXX-XXX" value="">
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="e.g johndoe@gmail.com" value="">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Souce of inquiry</label>
+            <select required class="form-control" id="source_of_inquiry" name="source">
+              <option></option>
+              {% for source in sources %}
+                <option value="{{source.id}}" >{{source.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="submit" data-loading-text="Loading..." type="submit" id="customerdetailsButton" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block context_scripts %}
+
+<script src="{% static 'core/scripts/customers_show.js' %}" ></script>
+{% endblock %}

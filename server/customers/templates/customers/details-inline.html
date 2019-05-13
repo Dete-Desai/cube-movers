@@ -1,0 +1,44 @@
+<div class="page-header">
+  <a role="button" data-toggle="collapse" href="#contact-details" aria-expanded="false" aria-controls="contact-details">
+    <span class="glyphicon glyphicon-user"></span> Customer details <span class="caret"></span>
+  </a>
+</div>
+<div class="collapse" id="contact-details">
+  <div class="col-xs-5">
+    <p>Full name:</p>
+    <p>Secondary name (proxy):</p>
+    <p>Phone number:</p>
+    <p>Secondary phone number:</p>
+    <p>Email address:</p>
+    <p>Secondary Email address:</p>
+    <p>Source of inquiry:</p>
+    <p>Move Type:</p>
+  </div>
+  <div class="col-xs-7">
+    <p>{{ move.customer.full_name }}</p>
+    {% if not move.customer.secondary_name  %}
+    <p>N/A</p>
+    {% else %}
+    <p>{{ move.customer.secondary_name }}</p>
+    {% endif %}
+    <p>{{ move.customer.phone_number }}</p>
+    {% if not move.customer.secondary_phone_number  %}
+    <p>N/A</p>
+    {% else %}
+    <p>{{ move.customer.secondary_phone_number }}</p>
+    {% endif %}
+    <p>{{ move.customer.user.email }}</p>
+    {% if not move.customer.secondary_email  %}
+    <p>N/A</p>
+    {% else %}
+    <p>{{ move.customer.secondary_email }}</p>
+    {% endif %}
+    <p>{{ move.customer.source.name }}</p>
+    <p>{{move.move_type.name}}
+  </div>
+  <div class="col-xs-12">
+    <a class="btn btn-default" href="{% url 'customers:view' pk=move.customer.id %}" role="button" data-toggle="modal" ><span class="glyphicon glyphicon-edit"></span> Edit details</a><br><br>
+  </div>
+</div>
+<!-- customer modal -->
+{% include 'customers/edit-modal.html' %}

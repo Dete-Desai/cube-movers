@@ -1,0 +1,13 @@
+Dear {{move.customer.full_name}}, <br/>
+
+Thank you for choosing Cube Movers! <br/>
+
+Your move is booked for {{move.move_date|date:"M d, Y f P"}}. <br/>
+
+
+Please remember we shall require payment in full one day in advance of the move. Payment may be done via Mpesa (Paybill number 805800), Bankers Cheque or By Credit Card (Master and Visa). If not we require an approved LPO prior to the move and payment upon completion of the job. Kindly make arrangements in order for us to confirm your move.
+Looking forward to offering you a pleasant move experience. <br/>
+
+
+
+{% include 'core/common/email_disclamer.txt' %}

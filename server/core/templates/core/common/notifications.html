@@ -1,0 +1,26 @@
+<div class="pull-right">
+      <!-- displays success -->
+    {% if messages %}
+    {% for message in messages%}
+    {% if message.tags == 'info' %}
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>{{message}}</strong>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    <!-- displays error -->
+    {% if messages %}
+    {% for message in messages%}
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>{{message}}</strong>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+</div>
+<span class="clearfix"></span>

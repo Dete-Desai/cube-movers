@@ -1,0 +1,8 @@
+{% extends 'core/common/list.html' %}
+{% block label_block %}<span class="glyphicon glyphicon-remove-circle"></span> Rejected Quotes {% endblock %}
+{% block title %}Rejected Quotes{% endblock %}
+{% block heading %}
+<h3 class="panel-title"><span class="glyphicon glyphicon-remove-circle"></span><strong> Rejected Quotes </strong></h3>
+{% endblock %}
+
+{% block table %} {{ datatable }} {% endblock %}

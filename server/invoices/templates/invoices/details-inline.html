@@ -1,0 +1,28 @@
+{% if move.move_status.name == "invoice" or move.move_status.name == "pre-move" or move.move_status.name == "move" or move.move_status.name == "post-move" or move.move_status.name == "complete" %}
+    <div class="page-header">
+      <a role="button" data-toggle="collapse" href="#invoice-details" aria-expanded="false" aria-controls="invoice-details">
+        <span class="glyphicon glyphicon-usd"></span> Invoice details <span class="caret"></span>
+      </a>
+    </div>
+    <div  class="collapse" id="invoice-details">
+      <div class="col-xs-5">
+        <p>Total volume:</p>
+        <p>Charge out price:</p>
+      </div>
+      <div class="col-xs-7">
+       <p>{{ move.checklist.total_vol }} CBMs</p>
+       <p>{{ move.move_type.currency }} {{ move.checklist.quotation.charge_out_price|floatformat:"2" }}</p>
+     </div>
+     <div class="col-xs-12">
+      <a class="btn btn-default btn-md" href="#" role="button" data-toggle="modal" data-target="#confirmpaymentModal"><span class="glyphicon glyphicon-ok"></span> Confirm Invoice Payment</a>
+      <a class="btn btn-default btn-md" href="#" role="button" data-toggle="modal" data-target="#approvecreditModal"><span class="glyphicon glyphicon-ok"></span> Approve Credit</a>
+      <br><br>
+    </div>
+  </div>
+  {% endif %}
+
+ <!-- confirm payment -->
+  {% include 'invoices/confirm_payment-modal.html' %}
+
+  <!-- approve credit -->
+  {% include 'invoices/approve_credit-modal.html' %}

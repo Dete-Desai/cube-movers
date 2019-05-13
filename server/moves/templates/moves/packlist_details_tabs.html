@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs" role="tablist">
+<li role="presentation" class="{{packlist}}"><a href="{% url 'moves:packlist' move_id=move_obj.id checklist_id=move_obj.checklist.id %}" aria-controls="home" role="tab" ><span class="glyphicon glyphicon-list"></span> Pack list</a></li>
+
+<li role="presentation" class="{{details}}"><a href="{% url 'moves:details' move_obj.id %}" ><span class="glyphicon glyphicon-info-sign"></span> Further details</a></li>
+</ul><br>

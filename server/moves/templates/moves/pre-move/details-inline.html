@@ -1,0 +1,97 @@
+{% if move.move_status.name == "pre-move" or move.move_status.name == "move" or move.move_status.name == "post-move" or move.move_status.name == "complete" %}
+
+<div class="page-header">
+    <a role="button" data-toggle="collapse" href="#pre-move-details" aria-expanded="false" aria-controls="pre-move-details">
+      <span class="glyphicon glyphicon-briefcase"></span> Pre-move details<span class="caret"></span>
+    </a>
+  </div>
+
+<div  class="collapse" id="pre-move-details">
+    <h5 class="page-header"><b><span class="glyphicon glyphicon-user"></span> Move team</b></h5>
+    <p>Required (from Quote)</p>
+    <ul>
+      {% for required in required_labour %}
+      <li>{{ required.item }} ({{ required.units }})</li>
+      {% endfor %}
+    </ul>
+
+    {% if not move_team_members %}
+    <p>Click 'Edit team' to add a move team.</p>
+    {% endif %}
+    <ol>
+      {% for member in move_team_members %}
+      {% if member.is_lead == True %}
+      <li> {{ member.user.first_name }} {{ member.user.last_name }} <span class="label label-info"><span class="glyphicon glyphicon-king"></span> Team Leader</span></li>
+
+      {% else %}
+
+      <li>{{ member.user.first_name }} {{ member.user.last_name }}</li>
+      {% endif %}
+
+      {% endfor %}
+    </ol>
+    <a class="btn btn-default" href="{% url 'moves:team' move.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit team</a><br><br>
+    <h5 class="page-header"><b><span class="glyphicon glyphicon-user"></span> Trainee</b></h5>
+    {% if not trainees %}
+    <p>Click 'Edit trainees' to add a trainee.</p>
+    {% endif %}
+    <ol>
+      {% for trainee in trainees %}
+      <li>{{ trainee.user.first_name }} {{ trainee.user.last_name }}</li>
+      {% endfor %}
+    </ol>
+
+    <a class="btn btn-default" href="{% url 'moves:trainees' move.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit trainees</a><br><br>
+    <h5 class="page-header"><b><span class="glyphicon glyphicon-transfer"></span> Transport</b></h5>
+    {% if not move_vehicles %}
+    <p>Click 'Edit vehicles' to add a vehicle.</p>
+    {% endif %}
+    <ol>
+      {% for vehicle in move_vehicles %}
+      <li>{{ vehicle.registration }}, {{ vehicle.make }} {{ vehicle.model }}</li>
+      {% endfor %}
+    </ol>
+    <a class="btn btn-default" href="{% url 'moves:vehicles' move.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit vehicles</a><br><br>
+    <a class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#approvemoveModal"><span class="glyphicon glyphicon-ok"></span> Approve move</a>
+    <hr>
+</div>
+
+<div class="page-header">
+    <a role="button" data-toggle="collapse" href="#packing-survey-report" aria-expanded="false" aria-controls="packing-survey-report">
+      <span class="glyphicon glyphicon-list-alt"></span> Pre-move / Packing Survey report <span class="caret"></span>
+    </a>
+</div>
+<div class="collapse" id="packing-survey-report">
+    <a class="btn btn-default" href="{% url 'moves:reports' move_id=move.id report_type='packing' %}" role="button"><span class="glyphicon glyphicon-list-alt"></span> Generate report</a> <br><br>
+</div>
+
+<div class="page-header">
+    <a role="button" data-toggle="collapse" href="#removal-report" aria-expanded="false" aria-controls="removal-report">
+      <span class="glyphicon glyphicon-list-alt"></span> Removal report <span class="caret"></span>
+    </a>
+</div>
+<div class="collapse" id="removal-report">
+    <a class="btn btn-default" href="{% url 'moves:reports' move_id=move.id report_type='removal' %}" role="button"><span class="glyphicon glyphicon-list-alt"></span> Generate report</a> <br><br>
+</div>
+
+
+{% if move.move_status.name == "move" or move.move_status.name == "post-move" or move.move_status.name == "complete" %}
+<div class="page-header">
+  <a role="button" data-toggle="collapse" href="#move-details" aria-expanded="false" aria-controls="booking-order">
+    <span class="glyphicon glyphicon-transfer"></span> Move details<span class="caret"></span>
+  </a>
+</div>
+<div  class="collapse" id="move-details">
+  <a class="btn btn-md btn-default" href="{% url 'moves:packlist' move_id=move.id  checklist_id=move.checklist.id %}" role="button"><span class="glyphicon glyphicon-list-alt"></span> Packlist / Move details</a>
+  <a class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#confirmMoveModal"><span class="glyphicon glyphicon-ok"></span> Confirm move</a>
+  <br><br>
+</div>
+{% endif %}
+{% endif %}
+
+<!-- confirm move modal -->
+{% include 'moves/pre-move/confirm-move-modal.html' %}
+
+<!-- approve move modal -->
+{% include 'moves/pre-move/approve-move-modal.html' %}
+

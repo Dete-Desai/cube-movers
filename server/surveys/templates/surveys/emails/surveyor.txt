@@ -1,0 +1,9 @@
+Hi {{full_name}},<br/><br/>
+
+This is to confirm that you will be required to conduct a survey on: {{survey_time}}
+Follow the link to obtain the details of the survey:
+<a href="http://{{host}}{% url 'inquiry:view' move_id %}" target="_blank"><strong>Survey Details</strong></a>
+
+
+
+{% include 'core/common/email_disclamer.txt' %}

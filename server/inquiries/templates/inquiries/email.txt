@@ -1,0 +1,13 @@
+Dear {{full_name}}, <br/>
+
+Thank you for contacting us! <br/>
+
+We have received your query regarding a move and our customer service team will contact you as soon as possible either by phone or email. <br/>
+
+
+We look forward to serving.<br/>
+Yours sincerely,<br/>
+Cube Movers Limited <br/>
+
+
+{% include 'core/common/email_disclamer.txt' %}

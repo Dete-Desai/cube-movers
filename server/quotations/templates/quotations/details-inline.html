@@ -1,0 +1,51 @@
+ {% load humanize %}
+ {% load ceil %}
+ {% if move.move_status.name == "survey" or move.move_status.name == "quotation" or move.move_status.name == "invoice" or move.move_status.name == "pre-move" or move.move_status.name == "move" or move.move_status.name == "post-move" or move.move_status.name == "complete" %}
+      <div class="page-header">
+        <a role="button" data-toggle="collapse" href="#quotation-details" aria-expanded="false" aria-controls="quotation-details">
+          <span class="glyphicon glyphicon-tag"></span> Quotation details <span class="caret"></span>
+        </a>
+      </div>
+      <div  class="collapse" id="quotation-details">
+        <div class="col-xs-5">
+          <p>Quotation status:</p>
+          <p>Reason for rejection:</p>
+          <p>Total volume:</p>
+          <p>Charge out price:</p>
+          <p>Proposed move date/time</p>
+        </div>
+        <div class="col-xs-7">
+         <p>{{ move.checklist.quotation.status }}</p>
+          {% if move.checklist.quotation.reject_reason %}
+          <p>{{move.checklist.quotation.reject_reason}}</p>
+          {% else %}
+          <p>N/A</p>
+          {%endif%}
+         {% if move.checklist.total_vol %}
+         <p>{{ move.checklist.total_vol }} CBMs</p>
+          {% else %}
+          <p>N/A</p>
+          {% endif %}
+         <p>{{ move.move_type.currency }} {{ move.checklist.quotation.charge_out_price|floatformat:"2"|intcomma }}</p>
+         <p>{{ move.move_date }}</p>
+       </div>
+       <div class="col-xs-12">
+        <a class="btn btn-default" href="{% url 'quotations:view' move.checklist.quotation.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit Costing Sheet</a>
+
+
+        <a class="btn btn-default" href="#" role="button" data-toggle="modal" data-target="#sendquoteModal"><span class="glyphicon glyphicon-edit"></span>  Send quote to customer</a>
+
+         {% if move.checklist.quotation.status == 'approved' %}
+        <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#raiseBookingOrderModal">
+        <span class="glyphicon glyphicon-arrow-up"></span> Raise booking order
+        </button>
+         {% endif %}
+
+
+        <br><br>
+      </div>
+    </div>
+{% endif %}
+
+ <!-- send quotation modal -->
+  {% include 'quotations/send-modal.html' %}

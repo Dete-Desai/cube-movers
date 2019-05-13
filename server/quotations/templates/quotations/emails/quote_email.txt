@@ -1,0 +1,27 @@
+{% load ceil %}
+{% load humanize %}
+CubeMovers
+Move without tears
+
+{{ datetime }}
+{{ move.customer.full_name }},
+{{ move.customer.phone_number }},
+{{ move.customer.user.email }},
+{{ move.property_details.primary_area_name }} {{ move.property_details.street_name }},
+
+
+Total CBM: {{ quote.checklist.total_vol }} KES{{ quote.checklist.total_cost }},
+
+{% for item in quote_items %}
+  {{ item.item }} {{ item.units }} {{ item.cost }},
+{% endfor %}
+
+Total Quote Price: {{ quote.charge_out_price|ceil|floatformat:"2"|intcomma}}
+
+Your secret token is: {{move.token}}
+
+<a href="http://{{host}}{% url 'quotations:approve'%}?quote_id={{quote.id}}&hash={{hash}}" target="_blank">Accept_Quote</a>
+
+<a href="http://{{host}}{% url 'quotations:reject'%}?quote_id={{quote.id}}&hash={{hash}}" target="_blank">Reject_Quote</a>
+
+{% include 'core/common/email_disclamer.txt' %}

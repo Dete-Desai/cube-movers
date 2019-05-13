@@ -1,0 +1,17 @@
+<!-- Confirm survey -->
+{% extends 'core/common/modal_base.html' %}
+{% load bootstrap3 %}
+{% block id %}confirmsurveyModal{% endblock %}
+{% block title %} Confirm survey details {% endblock %}
+{% block body %}
+ <form method="post" action="{% url 'surveys:confirm' pk=move.id %}">
+    {% csrf_token %}
+    <p>Confirming will take the Move record to the next phase and send emails to the Customer and Surveyor. Are you sure you want to proceed?</p>
+        <small>Note: You can skip sending the emails by ticking the checkbox below</small><br>
+        <input type="checkbox" name="skip" value="Skip_sending_email"/> Skip sending emails
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    <button type="submit"  class="btn btn-primary">Yes i'm sure</button>
+  </div>
+</form>
+{% endblock %}

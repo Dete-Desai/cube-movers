@@ -1,0 +1,26 @@
+[
+  {
+    "model": "core.settings",
+    "pk": 1,
+    "fields": {
+      "name": "profit_margin",
+      "value": "30"
+    }
+  },
+  {
+    "model": "core.settings",
+    "pk": 2,
+    "fields": {
+      "name": "commission",
+      "value": "10"
+    }
+  },
+  {
+    "model": "core.settings",
+    "pk": 3,
+    "fields": {
+      "name": "vat",
+      "value": "16"
+    }
+  }
+]

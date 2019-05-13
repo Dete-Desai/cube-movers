@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+	<div style="margin: 0 auto; text-align:center;">
+		<div style="padding-top: 10px;padding-bottom: 10px;">
+      {% include 'core/common/email_header.html' %}
+			<h1> <span style="font-size:20px;color:#ffcc14; text-transform:uppercase;">Removal report</span><br></h1>
+		</div>
+		</div><br>
+<div style="padding-left:50px">
+<table>
+  <tr>
+    <td>Name of client</td>
+    <td>{{ move.customer.full_name }}</td>
+  </tr>
+  <tr>
+    <td>Address</td>
+    <td>{{move.property_details.primary_area_name}}</td>
+  </tr>
+  <tr>
+    <td>Phone</td>
+    <td>{{ move.customer.phone_number }}</td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td>{{ move.customer.user.email }}</td>
+  </tr>
+  <tr>
+    <td>Origin</td>
+    <td>{{move.property_details.primary_area_name}}</td>
+  </tr>
+  <tr>
+    <td>Origin floor</td>
+    <td>{{move.property_details.floor}}</td>
+  </tr>
+  <tr>
+    <td>Origin Street</td>
+    <td>{{move.property_details.street_name}}</td>
+  </tr>
+  <tr>
+    <td>Origin Landmarks</td>
+    <td>{{move.property_details.land_marks}}</td>
+  </tr>
+  <tr>
+    <td>Destination</td>
+    {% if move.property_destination_details.primary_area_name %}
+    <td>{{move.property_destination_details.primary_area_name}}</td>
+    {% else %}
+    <td>N/A</td>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>Destination floor</td>
+    {% if move.property_destination_details.floor %}
+    <td>{{move.property_destination_details.floor}}</td>
+    {% else %}
+    <td>N/A</td>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>Destination street name</td>
+    {% if move.property_destination_details.street_name %}
+    <td>{{move.property_destination_details.street_name}}</td>
+    {% else %}
+    <td>N/A</td>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>Destination landmarks</td>
+    {% if move.property_destination_details.land_marks %}
+    <td>{{move.property_destination_details.land_marks}}</td>
+    {% else %}
+    <td>N/A</td>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>Source</td>
+    <td>{{ move.customer.source.name }}</td>
+  </tr>
+  <tr>
+    <td>Moving date</td>
+    <td>{{move.move_date}}</td>
+  </tr>
+</table>
+<br>
+
+<table>
+  <tr>
+    <td>Crew members</td>
+  </tr>
+<tr>
+    <td>
+    <ol>
+      {% for member in move.move_team.moveteammember_set.all %}
+      {% if member.is_lead == True %}
+      <li>{{ member.user.first_name }} {{ member.user.last_name }} <b>(Team Leader)</b></li>
+
+      {% else %}
+
+      <li>{{ member.user.first_name }} {{ member.user.last_name }}</li>
+      {% endif %}
+
+      {% endfor %}
+    </ol>
+
+      <ol>
+      {% for trainee in move.trainee_team.traineeteammember_set.all %}
+      <li>{{ trainee.user.first_name }} {{ trainee.user.last_name }}</li>
+      {% endfor %}
+    </ol>
+
+    </td>
+  </tr>
+</table>
+<br>
+<table>
+  <tr>
+    <td><b>MOST IMPORTANT</b></td>
+  </tr>
+  <tr>
+    <td>(1) The Company, not being of Common Carriers, reserve the right to reject goods offered for carriage</td>
+  </tr>
+  <tr>
+    <td>(2) All goods are carried at owner's risk</td>
+  </tr>
+  <tr>
+    <td>(3) All items of a personal or sensitive nature are the responsibility of the client and the Company shall not be held responsible for the loss or danage of the same.</td>
+  </tr>
+</table>
+<br>
+<table>
+    {% for vehicle in move.move_vehicles.all %}
+	   <tr>
+
+		<td>Vehicle Used Reg. No</td>
+		<td>{{vehicle.registration}}</td>
+	   </tr>
+       {% endfor %}
+	<tr>
+		<td>Speedometer Reading OUT</td>
+		<td>{{move.speedometer_out}}</td>
+	</tr>
+    <tr>
+    <td>Speedometer Reading IN</td>
+    <td>{{move.speedometer_in}}</td>
+  </tr>
+    <tr>
+    <td>Kms Run</td>
+    <td>{{move.kms_run}}</td>
+  </tr>
+</table>
+<br>
+<table>
+    <tr>
+    <td>Invoice No</td>
+    <td>QUOTE#{{move.checklist.quotation.id}}</td>
+  </tr>
+    <tr>
+    <td>Amount</td>
+    <td>{{ move.move_type.currency }} {{ move.checklist.quotation.charge_out_price|floatformat:"2"}}</td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

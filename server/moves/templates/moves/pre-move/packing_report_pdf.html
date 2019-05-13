@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+	<div style="margin: 0 auto; text-align:center;">
+		<div style="background-color:#072F6D;padding-top: 10px;padding-bottom: 10px;">
+
+			{% include 'core/common/email_header.html' %}
+      <h1> <span style="font-size:20px;color:#ffcc14; text-transform:uppercase;">Premove/Packing Report</span><br></h1>
+		</div>
+		</div><br>
+<div style="padding-left:50px">
+<table>
+  <tr>
+    <td>Name of client</td>
+    <td>{{ move.customer.full_name }}</td>
+  </tr>
+  <tr>
+    <td>Address</td>
+    <td>{{move.property_details.primary_area_name}}</td>
+  </tr>
+  <tr>
+    <td>Phone</td>
+    <td>{{ move.customer.phone_number }}</td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td>{{ move.customer.user.email }}</td>
+  </tr>
+  <tr>
+    <td>From</td>
+    <td>{{move.property_details.primary_area_name}}</td>
+  </tr>
+  <tr>
+    <td>To</td>
+    {% if move.property_destination_details.primary_area_name %}
+    <td>{{move.property_destination_details.primary_area_name}}</td>
+    {% else %}
+    <td>N/A</td>
+    {% endif %}
+  </tr>
+  <tr>
+    <td>Source</td>
+    <td>{{ move.customer.source.name }}</td>
+  </tr>
+  <tr>
+    <td>Moving date</td>
+    <td>{{move.move_date}}</td>
+  </tr>
+</table>
+<br><br>
+ <table>
+    <tr>
+      <th>Content/Description</th>
+      <th>Number of pieces</th>
+      <th>Volume (CBM)</th>
+    </tr>
+      {% for item in move.checklist.checklistitem_set.all %}
+      <tr>
+          <td>{% if item.item %}{{ item.item.name }}{% else %}{{ item.item_backup}}{% endif%}</td>
+          <td>{{ item.qty }}</td>
+          <td>{{ item.vol }}</td>
+      </tr>
+      {% endfor %}
+  </table>
+
+<br><br>
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!-- modal for total cbm edit -->
+<div class="modal fade" id="editTotalCBMModal" role="dialog" aria-labelledby="editTotalCBMLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="editTotalCBMLabel"><span class="glyphicon glyphicon-pencil"></span> Edit quote item</h4>
+      </div>
+      <form method="post" action="">
+        {% csrf_token %}
+        <div class="modal-body">
+         <input type="hidden" name="quote_id" id="quote_id" >
+         <div class="form-group">
+          <label for="quote_item" class="control-label">Item</label>
+          <p>Total CBM</p>
+        </div>
+        <div class="form-group">
+          <label for="units" class="control-label">Units</label>
+          <input type="text" name="units" class="form-control" id="units">
+        </div>
+        <div class="form-group">
+          <label for="cost" class="control-label">Cost</label>
+          <input type="text" name="cost" class="form-control" id="cost">
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="editModalSurveyItemButton" type="submit" data-loading-text="Loading..." class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

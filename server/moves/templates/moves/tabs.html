@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="{{team}}"><a href="{% url 'moves:team' obj.id %}" aria-controls="home" role="tab"><span class="glyphicon glyphicon-user"></span> Move team</a></li>
+  <li role="presentation" class="{{trainees}}"><a href="{% url 'moves:trainees' move.id %}" aria-controls="profile" role="tab"><span class="glyphicon glyphicon-asterisk"></span> Trainees</a></li>
+  <li role="presentation" class="{{vehicles}}"><a href="{% url 'moves:vehicles' obj.id %}" aria-controls="profile" role="tab"><span class="glyphicon glyphicon-transfer"></span> Transport</a></li>
+</ul>

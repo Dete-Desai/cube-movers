@@ -1,0 +1,8 @@
+{% extends 'core/common/list.html' %}
+{% block title %}Pre-survey{% endblock %}
+{% block label_block %}<span class="glyphicon glyphicon-eye-close"></span> Pre-surveys {% endblock %}
+{% block heading %}
+<h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"></span><strong> Confirmed Inquiries </strong></h3>
+{% endblock %}
+
+{% block table %} {{ datatable }} {% endblock %}

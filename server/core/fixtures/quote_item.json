@@ -1,0 +1,56 @@
+[
+  {
+    "model": "core.quoteitemdefault",
+    "pk": 1,
+    "fields": {
+      "item": "Large Box",
+      "cost": 219,
+      "quote_item_type": 1
+    }
+  },
+  {
+    "model": "core.quoteitemdefault",
+    "pk": 2,
+    "fields": {
+      "item": "Small Box",
+      "cost": 80,
+      "quote_item_type": 1
+    }
+  },
+  {
+    "model": "core.quoteitemdefault",
+    "pk": 3,
+    "fields": {
+      "item": "Mover",
+      "cost": 700,
+      "quote_item_type": 2
+    }
+  },
+  {
+    "model": "core.quoteitemdefault",
+    "pk": 4,
+    "fields": {
+      "item": "Technician",
+      "cost": 800,
+      "quote_item_type": 2
+    }
+  },
+  {
+    "model": "core.quoteitemdefault",
+    "pk": 5,
+    "fields": {
+      "item": "Stair Case 2nd Floor",
+      "cost": 30,
+      "quote_item_type": 3
+    }
+  },
+  {
+    "model": "core.quoteitemdefault",
+    "pk": 6,
+    "fields": {
+      "item": "DSTV STD",
+      "cost": 1500,
+      "quote_item_type": 3
+    }
+  }
+]

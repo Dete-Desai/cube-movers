@@ -1,0 +1,39 @@
+<!-- Send quote-->
+{% extends 'core/common/modal_base.html' %}
+{% load bootstrap3 %}
+{% load ceil %}
+{% load humanize %}
+{% block id %}sendquoteModal{% endblock %}
+{% block title %} Send Qoute To Customer {% endblock %}
+{% block body %}
+  <form method="post" action="{% url 'quotations:send' move.checklist.quotation.id %}">
+       {% csrf_token %}
+       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-send"></span> Send quote to customer</h4>
+      </div>
+      <div class="modal-body">
+        <div class="panel panel-default">
+        <div class="panel-heading"><b>Quote preview</b></div>
+          <div class="panel-body">
+            Total volume: {{move.checklist.total_vol}} Cbms <br>
+            Total cost: {{ move.move_type.currency }} {{move.checklist.quotation.charge_out_price|ceil|floatformat:"2"|intcomma}}
+            <div style="margin-top:15px;">
+            <a class="btn btn-default" href="{% url 'quotations:preview' move.id %}" target="blank">Preview quote document</a>
+            <a class="btn btn-primary" href="{% url 'quotations:edit' move_id=move.id %}">Edit quote</a>
+            </div>
+          </div>
+        </div>
+        <p>Choosing Yes will send the quotation details as an email to the customer for approval. Are you sure you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button data-loading-text="Loading..." type="submit" id="sendquoteButton" class="btn btn-primary">Yes i'm sure</button>
+      </div>
+    </form>
+
+{% endblock %}
+
+
+
+

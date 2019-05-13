@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+	<div style="margin: 0 auto; text-align:center;">
+		<div style="padding-top: 10px;padding-bottom: 10px;">
+			{% include 'core/common/email_header.html' %}
+            <h1> <span style="font-size:20px;color:#ffcc14; text-transform:uppercase;">Quote Inventory</span><br></h1>
+		</div>
+		</div><br>
+		<div style="padding-left:50px">
+		<h2>Move Inventory List</h2>
+			<table>
+				<tr>
+					<th style="text-align: left;">Quantity</th>
+					<th style="text-align: left;">Item name</th>
+					<th style="text-align: left;">Location</th>
+				</tr>
+				 {% for item in inventory %}
+				 <tr>
+					<td>{{ item.qty }}</td>
+				    <td>{% if item.item %}{{ item.item.name }}{% else %}{{ item.item_backup}}{% endif%}</td>
+				    <td>{{item.room.name}}</td>
+				 </tr>
+				 {% endfor %}
+			</table>
+		</div>
+</body>
+</html>

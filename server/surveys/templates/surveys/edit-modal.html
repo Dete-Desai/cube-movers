@@ -1,0 +1,21 @@
+
+{% extends 'core/common/modal_base.html' %}
+{% load bootstrap3 %}
+{% block id %}surveydetailsModal{% endblock %}
+{% block title %} Confirm survey details {% endblock %}
+{% block body %}
+<form method="post" action="{% url 'surveys:create' pk=move.id %}">
+  {% csrf_token %}
+  {% for field in survey_form %}
+      <div class="form-group">
+
+          {% bootstrap_field field %}
+
+      </div>
+  {% endfor %}
+   <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button data-loading-text="Loading..." type="submit" id="editPropertyButton" class="btn btn-primary">Save changes</button>
+    </div>
+</form>
+{% endblock %}

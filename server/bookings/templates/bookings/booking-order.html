@@ -1,0 +1,136 @@
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% block title %}Quotes - Cube Movers{% endblock %}
+{% block label_block %}
+  <ol class="breadcrumb">
+  <li><a href="{% url 'inquiry:view' move.id %}">
+  <span class="glyphicon glyphicon-list-alt"></span>
+  Move record</a></li>
+  <li class="active">Booking order</li>
+</ol>
+{% endblock %}
+{% block content %}
+
+  <div class="container">
+  <div class="col-md-10"><br>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="pull-left">
+          <h3 id="no-pdf" class="panel-title">
+          <span class=" glyphicon glyphicon-user"></span><strong> {{ move.customer.full_name }} </strong>
+        </h3>
+        </div>
+        <div class="pull-right">
+
+          <a class="btn btn-default" href="{% url 'bookings:pdf' move.id %}"><span class="glyphicon glyphicon-download"></span> Generate pdf</a>
+
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel-body">
+       <div class="col-xs-5">
+        <p>Client's name</p>
+        <p>Phone number</p>
+        <p>Email address</p>
+        <hr>
+        <p>Job type</p>
+        <p>Date of job</p>
+        <p>Origin</p>
+        <p>Origin floor</p>
+        <p>Origin Street</p>
+        <p>Origin Landmarks</p>
+        <p>Destination</p>
+        <p>Destination floor</p>
+        <p>Destination Street Name</p>
+        <p>Destination Land Marks</p>
+        <p>Status</p>
+        <p>Move representative</p>
+        <p>Volume (Cbm)</p>
+        <hr>
+      </div>
+      <div class="col-xs-7">
+        <p>{{ move.customer.full_name }}</p>
+        <p>{{ move.customer.phone_number }}</p>
+        <p>{{ move.customer.user.email }}</p>
+        <hr>
+        <p>{{move.move_type.name}}</p>
+        <p>{{move.move_date}}</p>
+        <p>{{move.property_details.primary_area_name}}</p>
+        <p>{{move.property_details.floor}}</p>
+        <p>{{move.property_details.street_name}}</p>
+        <p>{{move.property_details.land_marks}}</p>
+        {% if move.property_destination_details.primary_area_name %}
+        <p>{{move.property_destination_details.primary_area_name}}</p>
+        {% else %}
+        <p>N/A</p>
+        {% endif %}
+        {% if move.property_destination_details.floor %}
+        <p>{{move.property_destination_details.floor}}</p>
+        {% else %}
+        <p>N/A</p>
+        {% endif %}
+
+        {% if move.property_destination_details.street_name %}
+        <p>{{move.property_destination_details.street_name}}</p>
+        {% else %}
+        <p>N/A</p>
+        {% endif %}
+
+        {% if move.property_destination_details.land_marks %}
+        <p>{{move.property_destination_details.land_marks}}</p>
+        {% else %}
+        <p>N/A</p>
+        {% endif %}
+
+        <p>{{move.move_status.name}}</p>
+        <p>{{move.survey.surveyor.get_full_name}}</p>
+        <p>{{move.checklist.total_vol}}</p>
+        <hr>
+      </div>
+        {% for type in types %}
+      <div class="col-xs-5">
+        <p>{{type.name}}</p>
+      </div>
+      <div class="col-xs-7">
+        <ol>
+          {% for item in quote_items %}
+            {% if item.quote_item_type == type %}
+            <li>{{ item.item }} ({{item.units}})</li>
+            {% endif %}
+          {% endfor %}
+        </ol>
+        <hr>
+      </div>
+        {% endfor %}
+
+      <div class="col-xs-5">
+        <p>Billing</p>
+      </div>
+      <div class="col-xs-7">
+        <ul>
+          <li>VAT {{move.move_type.currency}} {{vat}} </li>
+          <li>Total {{move.move_type.currency}} {{quotation.charge_out_price}} </li>
+        </ul>
+        <hr>
+      </div>
+      <div class="col-xs-5">
+        <p>Special Instructions</p>
+      </div>
+      <div class="col-xs-7">
+        <p>{{move.special_instructions}}</p>
+        <hr>
+      </div>
+      <div class="col-xs-5">
+        <p>Accessibility and Directions Instructions</p>
+      </div>
+      <div class="col-xs-7">
+        <p>{{move.accessibility_instructions}}</p>
+         <hr>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+{% endblock %}

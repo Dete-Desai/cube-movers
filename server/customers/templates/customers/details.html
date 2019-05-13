@@ -1,0 +1,81 @@
+{% extends 'core/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+<div class="container">
+  <div class="page-header">
+    <h4 class="pull-left"><span class="glyphicon glyphicon-user"></span> Customers</h4>
+      {% include 'core/common/notifications.html' %}
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+     <h3 class="panel-title"><strong><span class="glyphicon glyphicon-list"></span> {{ customer.full_name }}</strong></h3>
+   </div>
+   <div class="panel-body">
+    <div>
+      <a role="button" data-toggle="collapse" href="#contact-details" aria-expanded="false" aria-controls="contact-details">
+        <span class="glyphicon glyphicon-user"></span> Customer details <span class="caret"></span>
+      </a>
+    </div><hr>
+    <div class="collapse" id="contact-details">
+      <div class="col-xs-5">
+        <p>Full name:</p>
+        <p>Secondary name (proxy):</p>
+        <p>Phone number:</p>
+        <p>Secondary phone number:</p>
+        <p>Email address:</p>
+        <p>Secondary Email address:</p>
+        <p>Source of inquiry:</p>
+      </div>
+      <div class="col-xs-7">
+        <p>{{ customer.full_name }}</p>
+        {% if not customer.secondary_name  %}
+        <p>N/A</p>
+        {% else %}
+        <p>{{ customer.secondary_name }}</p>
+        {% endif %}
+        <p>{{ customer.phone_number }}</p>
+        {% if not customer.secondary_phone_number  %}
+        <p>N/A</p>
+        {% else %}
+        <p>{{ customer.secondary_phone_number }}</p>
+        {% endif %}
+        <p>{{ customer.user.email }}</p>
+        {% if not customer.secondary_email  %}
+        <p>N/A</p>
+        {% else %}
+        <p>{{ customer.secondary_email }}</p>
+        {% endif %}
+
+        <p>{{ customer.source.name }}</p>
+      </div>
+      <div class="col-xs-12">
+        <a class="btn btn-default" href="#" role="button" data-toggle="modal" data-target="#customerdetailsModal"><span class="glyphicon glyphicon-edit"></span> Edit details</a><br><br>
+      </div>
+    </div>
+
+    <div>
+      <a role="button" data-toggle="collapse" href="#move-details" aria-expanded="false" aria-controls="move-details">
+        <span class="glyphicon glyphicon-transfer"></span> Moves <span class="caret"></span>
+      </a>
+    </div><hr>
+    <div class="collapse" id="move-details">
+        <ol>
+          {% for move in moves %}
+          <li><a href="{% url 'inquiry:view' pk=move.id %}">#MOVE_ID_{{move.id}}</a> {{move.property_details.primary_area_name}}</li>
+          {% endfor %}
+        </ol><hr>
+    </div>
+    <a class="btn btn-default" href="#" role="button" data-toggle="modal" data-target="#createInquiryModal"><span class="glyphicon glyphicon-copy"></span> Create new inquiry</a>
+  </div>
+</div>
+</div> <!--ends container -->
+
+
+{% include 'customers/edit-modal.html' %}
+{% include 'inquiries/create-modal.html' %}
+
+{% endblock %}
+
+{% block context_scripts %}
+<script src="{% static 'core/scripts/customer_detail.js' %}" ></script>
+{% endblock %}

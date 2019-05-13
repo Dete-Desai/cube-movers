@@ -1,0 +1,13 @@
+{% extends 'core/common/email_actions.html' %}
+{% load staticfiles %}
+{% block action_message %}
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span><strong> Quote Approval Error</strong></h3>
+    </div>
+    <div class="panel-body">
+        <p>An error occured approving the qoute</p>
+    </div>
+</div>
+{% endblock %}
+

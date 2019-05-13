@@ -1,0 +1,107 @@
+[
+  {
+    "model": "core.room",
+    "pk": 1,
+    "fields": {
+      "name": "Living/Family/Tv Room"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 2,
+    "fields": {
+      "name": "Dining Room"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 3,
+    "fields": {
+      "name": "Guest Room"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 4,
+    "fields": {
+      "name": "Study Room"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 5,
+    "fields": {
+      "name": "Kitchen"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 6,
+    "fields": {
+      "name": "Pantry"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 7,
+    "fields": {
+      "name": "Laundry"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 8,
+    "fields": {
+      "name": "Bed Rooms"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 9,
+    "fields": {
+      "name": "Baby Room"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 10,
+    "fields": {
+      "name": "Servant Quarter"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 11,
+    "fields": {
+      "name": "Outdoor/Garden"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 12,
+    "fields": {
+      "name": "Garage"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 13,
+    "fields": {
+      "name": "Master Bed Room"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 14,
+    "fields": {
+      "name": "Hallway/Corridor"
+    }
+  },
+  {
+    "model": "core.room",
+    "pk": 15,
+    "fields": {
+      "name": "Store/Under Stairs"
+    }
+  }
+]

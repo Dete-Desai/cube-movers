@@ -1,0 +1,60 @@
+
+{% extends 'core/base.html' %}
+{% load staticfiles %}
+{% block title %}login - Cube Movers{% endblock %}
+{% block top-nav %} {% endblock %}
+{% block body_block %}
+
+<br><br><br><br>
+<div class="login-bg">
+
+  <div class="container">
+
+    {% if messages %}
+    {% for message in messages%}
+    <div class="alert alert-danger col-md-4 form-panel" role="alert">
+        <p>{{ message }}</p>
+    </div><br>
+    {% endfor %}
+    {% endif %}
+
+    <form name="form" role="form" class="col-md-4 form-panel floating-form" method="post" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      <div class="panel panel-default login">
+          <div class="panel-heading"><img class="center-block" src="{% static 'core/images/logo.jpg' %}" alt="cubemovers"></div>
+          <div class="panel-body">
+            <div class="form-group">
+                {% if form.username.errors %}
+                <div class="has-error">
+                    {% endif %}
+                    <label class="control-label" for="email">Email</label>
+                    <input type="text" name="username" id="email" class="form-control" placeholder="E.g. johndoe@example.com" value="{{form.username.value}}" required/>
+                    {% if form.username.errors %}
+                    <p class="help-block">{{form.username.errors.value}}</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if form.password.errors %}
+                <div class="has-error">
+                    {% endif %}
+                    <label class="control-label" for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password"  required/>
+                    {% if form.password.errors %}
+                    <p class="help-block">{{ form.password.errors }}</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="form-actions">
+                <button id="loader" type="submit" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block" autocomplete="off">Login</button>
+            </div>
+        </div>
+    </div>
+        <input type="hidden" name="next" value="{{ next }}">
+</form>
+
+</div>
+</div>
+{% endblock %}
+
+

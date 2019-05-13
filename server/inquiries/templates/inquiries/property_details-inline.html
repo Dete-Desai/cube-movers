@@ -1,0 +1,58 @@
+<div class="page-header">
+      <a role="button" data-toggle="collapse" href="#property-details" aria-expanded="false" aria-controls="property-details">
+        <span class="glyphicon glyphicon-home"></span> Property details<span class="caret"></span>
+      </a>
+    </div>
+
+    <div class="collapse" id="property-details">
+      {% if move.move_status.name == "inquiry" %}
+      <a class="btn btn-default" href="{% url 'inquiry:add_property' pk=move.id %}" role="button"><span class="glyphicon glyphicon-edit"></span> Add property details</a><br><br>
+
+      {% else  %}
+      <!-- start of property details-->
+      <div>
+        <div class="location">
+          <p><span class="glyphicon glyphicon-map-marker"></span> <b>Location details</b></p>
+          <hr>
+          <div class="col-xs-5">
+            <p>Primary area name:</p>
+            <p>Secondary area name:</p>
+            <p>Street name:</p>
+            <p>Secondary street name:</p>
+          </div>
+          <div class="col-xs-7">
+            <p>{{ move.property_details.primary_area_name }}</p>
+            <p>{{ move.property_details.secondary_area_name }}</p>
+            <p>{{ move.property_details.street_name }}</p>
+            <p>{{ move.property_details.secondary_street_name }}</p>
+          </div>
+        </div>
+        <div class="property">
+         <p><span class="glyphicon glyphicon-picture"></span> <b>Property description</b></p>
+         <hr>
+         <div class="col-xs-5">
+          <p>Color of gate:</p>
+          <p>Name of compound:</p>
+          <p>House no:</p>
+          <p>Floor:</p>
+          <p>Side of the road:</p>
+          <p>Landmarks:</p>
+        </div>
+        <div class="col-xs-7">
+          <p>{{ move.property_details.gate_color }}</p>
+          <p>{{ move.property_details.compound_name }}</p>
+          <p>{{ move.property_details.house_no }}</p>
+          <p>{{ move.property_details.floor }}</p>
+          <p>{{ move.property_details.side_of_road }}</p>
+          <p>{{ move.property_details.land_marks }}</p>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <a class="btn btn-default" href="#" role="button" data-toggle="modal" data-target="#propertydetailsModal"><span class="glyphicon glyphicon-edit"></span> Edit details</a>
+        <br><br>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <!-- property modal -->
+  {% include 'inquiries/property_modal.html' %}

@@ -1,0 +1,100 @@
+
+{% extends 'core/common/container.html' %}
+{% load staticfiles %}
+{% block title %}Checklist - Cube Movers{% endblock %}
+{% block label_block %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'inquiry:view' move.id %}">
+  <span class="glyphicon glyphicon-list-alt"></span>
+  Move record</a></li>
+  <li class="active">
+  <span class=" glyphicon glyphicon-transfer"></span>
+  Transport</li>
+</ol>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ move.customer.full_name }}</h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <!-- Nav tabs -->
+          {% include 'moves/tabs.html' with obj=move vehicles='active' %}
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane">
+          </div>
+          <div role="tabpanel" class="tab-pane active">
+            <div class="col-md-12"><br>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                 <form method="post" accept="" ction="{% url 'moves:vehicles' move.id %}">
+                  {% csrf_token %}
+
+                  <div class="form-group">
+                    {% if form.team_id.errors %}
+                    <div class="has-error">
+                      {% endif %}
+                      <label for="move-vehicle-list" class="control-label">Add a vehicle</label>
+                      <select name="vehicle_id" class="form-control" style="width: 100%"  id="move-vehicle-list"  required>
+                        <option></option>
+                        {% for vehicle in vehicles %}
+                        <option value="{{ vehicle.id }}">{{ vehicle.registration }}, {{ vehicle.make }} {{ vehicle.model }}</option>
+                        {% endfor %}
+                      </select>
+                      {% if form.team_id.errors %}
+                    </div>
+                    {% endif %}
+                  </div>
+
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span> Add vehicle</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-body">
+               <h4>Vehicles</h4><br>
+               <table class="table">
+                <tr>
+                  <th>Name</th>
+                  <th>Action</th>
+                </tr>
+                {% for vehicle in move_vehicles %}
+                <tr>
+                  <td>{{ vehicle.registration }}, {{ vehicle.make }} {{ vehicle.model }}</td>
+                  <td>
+                    <form method="post" action="{% url 'moves:delete_vehicle' move_id=move.id vehicle_id=vehicle.id %}">
+                      {% csrf_token %}
+                      <button class="not-button" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block context_scripts %}
+<script src="{% static 'core/components/select2/js/select2.min.js' %}" ></script>
+<script src="{% static 'core/scripts/move_vehicle.js' %}" ></script>
+{% endblock %}

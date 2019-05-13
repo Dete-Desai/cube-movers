@@ -1,0 +1,109 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+{% if move.survey.surveyor.staffprofile.signature %}
+
+
+
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+              margin: 0 40px;
+              font-family: "Times New Roman", Georgia, Serif;
+              font-size: 12px;
+              line-height: 20px;
+              color: #333333;
+              background-color: #ffffff;
+        }
+        h4{
+            font-size: 14px;
+        }
+        h3{
+            font-size: 18px;
+        }
+        table {
+          max-width: 100%;
+          background-color: transparent;
+          border-collapse: collapse;
+          border-spacing: 0;
+        }
+
+        .table {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+
+        .table th,
+        .table td {
+          padding: 4px;
+          line-height: 20px;
+          text-align: left;
+          vertical-align: top;
+          border-top: 1px solid #dddddd;
+        }
+
+        .table th {
+          font-weight: bold;
+        }
+
+        .table thead th {
+          vertical-align: bottom;
+        }
+
+        .table caption + thead tr:first-child th,
+        .table caption + thead tr:first-child td,
+        .table colgroup + thead tr:first-child th,
+        .table colgroup + thead tr:first-child td,
+        .table thead:first-child tr:first-child th,
+        .table thead:first-child tr:first-child td {
+          border-top: 0;
+        }
+
+        .table tbody + tbody {
+          border-top: 2px solid #dddddd;
+        }
+
+        .table-condensed th,
+        .table-condensed td {
+          padding: 4px 5px;
+        }
+        @page {
+        size: letter portrait;
+        margin: 1.1cm;
+        @frame footer_frame {           /* Static frame */
+            -pdf-frame-content: footer_content_image;
+            left: 35pt; width: 512pt; top: 600pt; height: 20pt;
+        }
+        @frame footer_frame {           /* Static frame */
+            -pdf-frame-content: footer_content;
+            left: 35pt; width: 512pt; top: 762pt; height: 20pt;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% include 'core/common/email_header.html' %}
+        <div class="row">
+            <div class="span12">
+                <p style="margin-left:480px"><strong>REF:</strong> {{move.checklist.quotation.quote_number}}<br></p>
+                <p>{% now "jS F Y" %}, <br>
+                <strong>Name:</strong> {{ move.customer.full_name }}<br>
+                <strong>Email:</strong> {{ move.customer.user.email }}<br>
+                <strong>Tel:</strong> {{ move.customer.phone_number }}</p>
+                <p>Dear {{ move.customer.full_name }},</p>
+                {% block body %}
+                {% endblock %}
+
+            </div>
+        </div>
+
+
+    {% include 'moves/pdf/footer.html' %}
+{% else %}
+
+    <p> You must provide a signature for Move Rep: {{move.survey.surveyor.first_name}} {{move.survey.surveyor.last_name}} in the staff profile before generating this document</p>
+{% endif %}

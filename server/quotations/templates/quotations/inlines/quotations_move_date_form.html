@@ -1,0 +1,32 @@
+<div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Move date</h3>
+      </div>
+      <div class="panel-body">
+        <!-- <div class="text-center"> -->
+            <form method="post" action="{% url 'quotations:add_quote_date' quote.id %}">
+              {% csrf_token %}
+              <input type="hidden" name="move_id" value="{{move.id}}">
+              <div class="form-group">
+                {% if form.date.errors %}
+                <div class="has-error">
+                  {% endif %}
+                  <label for="move-time" class="control-label">Move date and time</label>
+                  <p><span class="label label-info">  Active Move Date/Time : {{ move.move_date }} </span></p>
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+                    <input name="date" type='text' value ='{{move_date}}' class="form-control" id='move-time' placeholder="Move date and time"/>
+                  </div>
+                  {% if form.date.errors %}
+                  <p>{{form.date.errors}}</p>
+                </div>
+                {% endif %}
+              </div>
+              <button type="submit" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-plus"></span> Add move date and time</button>
+            </form>
+
+         <!--  </div> -->
+      </div>
+    </div>
+  </div>
