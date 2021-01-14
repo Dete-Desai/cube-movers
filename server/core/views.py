@@ -1,14 +1,12 @@
 import json
 from functools import wraps
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
-from forms import (
-    LoginForm,
-)
+from .forms import LoginForm
 
 
 # this decorator is for authenticating each request to the API

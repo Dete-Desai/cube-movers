@@ -106,14 +106,14 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cubemovercrm',
-        'USER': 'root',
-        'PASSWORD': '#cbm2015',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'cubemovers_db',
+        'USER': 'appuser',
+        'PASSWORD': 'user@123',
         'HOST': 'localhost',
-        'OPTIONS': {
-            "init_command": "SET default_storage_engine=INNODB, character_set_connection=utf8, collation_connection=utf8_unicode_ci"
-        }
+        # 'OPTIONS': {
+        #     "init_command": "SET default_storage_engine=INNODB, character_set_connection=utf8, collation_connection=utf8_unicode_ci"
+        # }
     }
 }
 
@@ -165,10 +165,10 @@ BOOKING_ORDER_EMAIL = 'team@cubemovers.co.ke'
 
 from django.conf import global_settings
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    global_settings.TEMPLATE_CONTEXT_PROCESSORS +
-    ('django.core.context_processors.request',)
-)
+# TEMPLATE_CONTEXT_PROCESSORS = (
+#     global_settings.TEMPLATE_CONTEXT_PROCESSORS +
+#     ('django.core.context_processors.request',)
+# )
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

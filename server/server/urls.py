@@ -1,21 +1,23 @@
-from django.conf.urls import include, url
 from django.contrib import admin
+from django.urls import include, path
+from django.urls import reverse
 from core import views
 
 urlpatterns = [
-    url(r'^$', include('dashboard.urls', namespace='dashboard')),
-    url(r'^dashboard/', include('dashboard.urls', namespace='dashboard')),
-    url(r'^customers/', include('customers.urls', namespace='customers')),
-    url(r'^inquiry/', include('inquiries.urls', namespace='inquiry')),
-    url(r'^surveys/', include('surveys.urls', namespace='surveys')),
-    url(r'^quotations/', include('quotations.urls', namespace='quotations')),
-    url(r'^moves/', include('moves.urls', namespace='moves')),
-    url(r'^invoices/', include('invoices.urls', namespace='invoices')),
-    url(r'^bookings/', include('bookings.urls', namespace='bookings')),
-    url(r'^reports/', include('reports.urls', namespace='reports')),
-    url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^login/$', views.account_login, name='account_login'),
-    url(r'^logout/$', views.account_logout, name='account_logout'),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'helpdesk/', include('helpdesk.urls')),
+    #path('mfa/', include(("deux.urls", 'app_name'), namespace="mfa")),
+    path('', include(('dashboard.urls','dashboard'), namespace='dashboard')),
+    path('dashboard/', include(('dashboard.urls','dashboard'), namespace='dashboard')),
+    path('customers/', include(('customers.urls','customers'), namespace='customers')),
+    path('inquiry/', include(('inquiries.urls','inquiries'), namespace='inquiry')),
+    path('surveys/', include(('surveys.urls','surveys'), namespace='surveys')),
+    path('quotations/', include(('quotations.urls','quotations'), namespace='quotations')),
+    path('moves/', include(('moves.urls','moves'), namespace='moves')),
+    path('invoices/', include(('invoices.urls','invoices'), namespace='invoices')),
+    path('bookings/', include(('bookings.urls','bookings'), namespace='bookings')),
+    path('reports/', include(('reports.urls','reports'), namespace='reports')),
+    path('tinymce/', include(('tinymce.urls','tinymce'))),
+    path('login/$', views.account_login, name='account_login'),
+    path('logout/$', views.account_logout, name='account_logout'),
+    path('admin/', include(admin.site.urls)),
+    path('helpdesk/', include('helpdesk.urls','helpdesk')),
 ]

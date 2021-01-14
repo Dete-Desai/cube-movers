@@ -19,7 +19,7 @@ class Source(models.Model):
 
 
 class StaffProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField('User',on_delete=models.CASCADE)
     phone_number = PhoneNumberField(max_length=50, null=True)
     code = models.CharField(max_length=10, null=True)
     signature = models.ImageField(
@@ -27,8 +27,8 @@ class StaffProfile(models.Model):
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(User)
-    source = models.ForeignKey(Source)
+    user = models.OneToOneField('User',on_delete=models.CASCADE)
+    source = models.ForeignKey('Source',on_delete=models.CASCADE)
     full_name = models.CharField(max_length=50)
     secondary_name = models.CharField(max_length=50, blank=True, null=True)
     phone_number = PhoneNumberField(max_length=30)
@@ -93,8 +93,8 @@ class PropertyDestinationDetails(models.Model):
 
 
 class Survey(models.Model):
-    surveyor = models.ForeignKey(User, null=True)
-    vehicle = models.ForeignKey(Vehicle, null=True)
+    surveyor = models.ForeignKey('User',on_delete=models.CASCADE, null=True)
+    vehicle = models.ForeignKey('Vehicle',on_delete=models.CASCADE, null=True)
     survey_time = models.DateTimeField(null=True)
     move_time = models.DateTimeField(null=True)
     created_time = models.DateTimeField(auto_now_add=True)
@@ -119,8 +119,8 @@ class MoveTeam(models.Model):
 
 
 class MoveTeamMember(models.Model):
-    move_team = models.ForeignKey(MoveTeam)
-    user = models.ForeignKey(User)
+    move_team = models.ForeignKey('MoveTeam',on_delete=models.CASCADE)
+    user = models.ForeignKey('User',on_delete=models.CASCADE)
     is_lead = models.BooleanField(default=False)
 
 
@@ -129,8 +129,8 @@ class TraineeTeam(models.Model):
 
 
 class TraineeTeamMember(models.Model):
-    trainee_team = models.ForeignKey(TraineeTeam)
-    user = models.ForeignKey(User)
+    trainee_team = models.ForeignKey('TraineeTeam',on_delete=models.CASCADE)
+    user = models.ForeignKey('User',on_delete=models.CASCADE)
 
 
 class MoveType(models.Model):
@@ -174,26 +174,25 @@ class Branch(models.Model):
 
 class Move(models.Model):
 
-    customer = models.ForeignKey(Customer)
-    move_status = models.ForeignKey(MoveStatus)
-    move_type = models.ForeignKey(MoveType, null=True)
-    move_type_details = models.ForeignKey(MoveTypeDetails, null=True)
+    customer = models.ForeignKey('Customer',on_delete=models.CASCADE)
+    move_status = models.ForeignKey('MoveStatus',on_delete=models.CASCADE)
+    move_type = models.ForeignKey('MoveType',on_delete=models.CASCADE, null=True)
+    move_type_details = models.ForeignKey('MoveTypeDetails',on_delete=models.CASCADE, null=True)
     hash = models.TextField(null=True)
-    property_details = models.OneToOneField(PropertyDetails)
-    property_destination_details = models.OneToOneField(
-        PropertyDestinationDetails, null=True)
-    survey = models.OneToOneField(Survey)
-    move_team = models.ForeignKey(MoveTeam, null=True)
-    trainee_team = models.ForeignKey(TraineeTeam, null=True)
-    move_vehicles = models.ManyToManyField(Vehicle)
+    property_details = models.OneToOneField('PropertyDetails',on_delete=models.CASCADE)
+    property_destination_details = models.OneToOneField('PropertyDestinationDetails',on_delete=models.CASCADE, null=True)
+    survey = models.OneToOneField('Survey',on_delete=models.CASCADE)
+    move_team = models.ForeignKey('MoveTeam',on_delete=models.CASCADE, null=True)
+    trainee_team = models.ForeignKey('TraineeTeam',on_delete=models.CASCADE, null=True)
+    move_vehicles = models.ManyToManyField('Vehicle')
     token = models.CharField(max_length=10, null=True)
     is_credit = models.BooleanField(default=False)
-    delight = models.OneToOneField(Delight, null=True)
+    delight = models.OneToOneField('Delight',on_delete=models.CASCADE, null=True)
     move_date = models.DateTimeField(null=True)
-    move_rep = models.ForeignKey(User, related_name="move_rep")
+    move_rep = models.ForeignKey('User',on_delete=models.CASCADE, related_name="move_rep")
     special_instructions = models.TextField(null=True)
     accessibility_instructions = models.TextField(null=True)
-    branch = models.ForeignKey(Branch, null=True)
+    branch = models.ForeignKey('Branch',on_delete=models.CASCADE, null=True)
 
     departure_from_office = models.DateTimeField(null=True)
     arrival_at_client = models.DateTimeField(null=True)
@@ -230,9 +229,9 @@ class Move(models.Model):
 
 
 class MoveLogs(models.Model):
-    move_status = models.ForeignKey(MoveStatus, null=True)
-    move = models.ForeignKey(Move, null=True)
-    move_rep = models.ForeignKey(User, null=True)
+    move_status = models.ForeignKey('MoveStatus',on_delete=models.CASCADE, null=True)
+    move = models.ForeignKey('Move',on_delete=models.CASCADE, null=True)
+    move_rep = models.ForeignKey('User',on_delete=models.CASCADE, null=True)
     timestamp = models.DateField(auto_now_add=True)
 
 
@@ -262,7 +261,7 @@ class QuoteItemType(models.Model):
 
 
 class QuoteItemDefault(models.Model):
-    quote_item_type = models.ForeignKey(QuoteItemType, null=True)
+    quote_item_type = models.ForeignKey('QuoteItemType',on_delete=models.CASCADE, null=True)
     item = models.CharField(max_length=30, unique=True)
     cost = models.FloatField()
 
@@ -278,7 +277,7 @@ class Quotation(models.Model):
     hash = models.TextField(null=True)
     status = models.CharField(max_length=30, default="not sent")
     reject_reason = models.TextField(null=True)
-    move_rep = models.ForeignKey(User, null=True)
+    move_rep = models.ForeignKey('User',on_delete=models.CASCADE,null=True)
     created_time = models.DateTimeField(auto_now_add=True)
     sent_time = models.DateTimeField(null=True)
     reply_time = models.DateTimeField(null=True)
@@ -294,16 +293,16 @@ class Quotation(models.Model):
 
 
 class QuoteItem(models.Model):
-    quotation = models.ForeignKey(Quotation)
-    quote_item_type = models.ForeignKey(QuoteItemType, null=True)
+    quotation = models.ForeignKey('Quotation',on_delete=models.CASCADE)
+    quote_item_type = models.ForeignKey('QuoteItemType',on_delete=models.CASCADE, null=True)
     item = models.CharField(max_length=30)
     cost = models.FloatField()
     units = models.IntegerField()
 
 
 class Checklist(models.Model):
-    quotation = models.OneToOneField(Quotation, null=True)
-    move = models.OneToOneField(Move)
+    quotation = models.OneToOneField('Quotation',on_delete=models.CASCADE, null=True)
+    move = models.OneToOneField('Move',on_delete=models.CASCADE)
     total_vol = models.FloatField(default=0.0, null=True)
     total_cost = models.FloatField(default=0.0, null=True)
 
@@ -322,11 +321,11 @@ class Office(models.Model):
 
 
 class ChecklistItem(models.Model):
-    checklist = models.ForeignKey(Checklist)
-    room = models.ForeignKey(Room)
-    office = models.ForeignKey(Office, null=True)
+    checklist = models.ForeignKey('Checklist',on_delete=models.CASCADE)
+    room = models.ForeignKey('Room',on_delete=models.CASCADE)
+    office = models.ForeignKey('Office',on_delete=models.CASCADE, null=True)
     item_backup = models.CharField(max_length=30)
-    item = models.ForeignKey(Item, null=True, blank=True)
+    item = models.ForeignKey('Item',on_delete=models.CASCADE, null=True, blank=True)
     vol = models.FloatField()
     qty = models.IntegerField(default=0, null=True)
     box_ref = models.CharField(max_length=50, null=True)
@@ -344,5 +343,5 @@ class QuoteDocument(models.Model):
     Keep a record of edited quotation documents
     """
 
-    move = models.OneToOneField(Move)
+    move = models.OneToOneField('Move',on_delete=models.CASCADE)
     quote_content = models.TextField()

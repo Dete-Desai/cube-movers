@@ -4,7 +4,7 @@ from datetime import datetime
 from django.template import Context
 from django.template.loader import get_template
 from django.conf import settings
-from AfricasTalkingGateway import AfricasTalkingGateway
+from .AfricasTalkingGateway import AfricasTalkingGateway
 from .tasks import send_email_helper
 from .models import (
     Move, MoveStatus, ChecklistItem, QuoteItem)

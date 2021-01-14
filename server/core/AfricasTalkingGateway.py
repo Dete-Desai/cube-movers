@@ -13,7 +13,7 @@
 """
 
 import urllib
-import urllib2
+from urllib.request import urlopen
 import json
 
 class AfricasTalkingGatewayException(Exception):
@@ -225,5 +225,6 @@ class AfricasTalkingGateway:
 			self.responseCode = response.getcode()
 			response = response.read()
 			if self.Debug:
-				print response
-			return response
+				print (response)
+				feedback = ['No module named celery']
+			return feedback

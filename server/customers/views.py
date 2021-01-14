@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.contrib.admin.models import LogEntry, ADDITION
 from django.contrib.contenttypes.models import ContentType
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_str
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
 from datatableview.views import DatatableView

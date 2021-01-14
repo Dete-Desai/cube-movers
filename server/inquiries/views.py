@@ -12,7 +12,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib.admin.models import LogEntry, ADDITION
 from django.contrib.contenttypes.models import ContentType
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_str
 from core.utils import filter_queryset, send_email, get_customer_emails
 from core.permissions import (
     can_view_inquiry,
