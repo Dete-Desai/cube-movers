@@ -26,7 +26,7 @@ from core.mixins import GetMoveObjMixin
 from .forms import (
     NewCustomerInquiryForm, InquiryDetailsForm,
     PropertyDetailsForm)
-from surveys.forms import (SurveyForm, )
+from surveys.forms import SurveyForm
 
 
 class InquiryListView(DatatableView):

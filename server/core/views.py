@@ -48,7 +48,7 @@ def account_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    if request.POST["next"] is not "":
+                    if request.POST["next"] != "":
                         return HttpResponseRedirect(request.POST["next"])
                     else:
                         return HttpResponseRedirect(reverse('overview_show'))
